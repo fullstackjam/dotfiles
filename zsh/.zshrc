@@ -71,6 +71,7 @@ if command -v pyenv-virtualenv-init 1>/dev/null 2>&1; then
 fi
 
 # Additional useful exports
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export HISTSIZE=10000
 export SAVEHIST=10000
