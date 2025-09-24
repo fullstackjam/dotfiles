@@ -60,11 +60,8 @@ mkcd() {
     mkdir -p "$1" && cd "$1"
 }
 
-# Load pyenv
+# Load pyenv (PATH setup is in .zprofile)
 if command -v pyenv 1>/dev/null 2>&1; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
 
