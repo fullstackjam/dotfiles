@@ -76,6 +76,11 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 
+# Proxy configuration
+export https_proxy=http://127.0.0.1:7897
+export http_proxy=http://127.0.0.1:7897
+export all_proxy=socks5://127.0.0.1:7897
+
 # Enable history sharing between terminals
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
