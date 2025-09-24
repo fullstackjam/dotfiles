@@ -24,6 +24,8 @@ brew "zsh-autosuggestions"
 # GUI applications
 cask "warp"
 cask "1password"
+cask "betterdisplay"
+cask "wechat"
 cask "scroll-reverser"
 cask "visual-studio-code"
 cask "cursor"
