@@ -7,12 +7,14 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load?
 plugins=(
   git
-  zsh-syntax-highlighting
-  zsh-autosuggestions
   kubectl
   helm
   pyenv
 )
+
+# Load zsh plugins manually (installed via Homebrew)
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source $ZSH/oh-my-zsh.sh
 
@@ -60,6 +62,9 @@ mkcd() {
 
 # Load pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
 

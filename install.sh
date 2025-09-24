@@ -76,4 +76,10 @@ for dir in */; do
     fi
 done
 
+# Special handling for profile files (they need to be in home directory root)
+if [ -d "profile" ]; then
+    print_status "Linking profile files"
+    stow --restow profile
+fi
+
 echo "=== ✅ Installation complete, restart terminal to take effect ==="
