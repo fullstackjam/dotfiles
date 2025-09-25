@@ -16,6 +16,7 @@ brew "kubectl"
 brew "helm"
 brew "pyenv"
 brew "pyenv-virtualenv"
+brew "nvm"
 
 # Zsh plugins
 brew "zsh-syntax-highlighting"
