@@ -23,6 +23,8 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 brew "nvm"
 brew "terraform"
+brew "awscli"
+brew "telnet"
 
 # Zsh plugins
 brew "zsh-syntax-highlighting"
