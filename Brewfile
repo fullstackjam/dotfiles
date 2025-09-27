@@ -17,6 +17,7 @@ brew "helm"
 brew "pyenv"
 brew "pyenv-virtualenv"
 brew "nvm"
+brew "terraform"
 
 # Zsh plugins
 brew "zsh-syntax-highlighting"
