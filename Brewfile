@@ -1,3 +1,6 @@
+# This Brewfile is used to manage Homebrew packages and applications.
+tap "tencentcloud/tccli"
+
 # Essential CLI tools
 brew "git"
 brew "zsh"
@@ -10,6 +13,8 @@ brew "yq"
 brew "tree"
 brew "htop"
 brew "fd"
+brew "aliyun-cli"
+brew "tccli"
 
 # Development tools
 brew "kubectl"

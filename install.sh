@@ -76,17 +76,6 @@ for dir in */; do
     fi
 done
 
-# Special handling for nvm .nvmrc file
-if [ -f "nvm/.nvmrc" ]; then
-    print_status "Setting up nvm default version"
-    if command -v nvm &>/dev/null; then
-        nvm install
-        nvm use
-    else
-        print_warning "nvm not found, please install it first"
-    fi
-fi
-
 # Special handling for profile files (they need to be in home directory root)
 if [ -d "profile" ]; then
     print_status "Linking profile files"
