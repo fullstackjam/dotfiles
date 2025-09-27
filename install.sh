@@ -68,18 +68,35 @@ fi
 # Change to dotfiles directory
 cd "$DOTFILES_DIR"
 
+# Clean up existing links first
+print_status "Cleaning up existing links"
+
+# Remove existing dotfiles links
+for file in .gitconfig .zshrc .zprofile .nvmrc; do
+    if [ -L "$HOME/$file" ]; then
+        print_status "Removing existing link: $HOME/$file"
+        rm -f "$HOME/$file"
+    fi
+done
+
+# Remove nvim config directory if it's a link
+if [ -L "$HOME/.config/nvim" ]; then
+    print_status "Removing existing nvim config link: $HOME/.config/nvim"
+    rm -f "$HOME/.config/nvim"
+fi
+
+# Remove nvim init.vim if it's a link
+if [ -L "$HOME/.config/nvim/init.vim" ]; then
+    print_status "Removing existing nvim init.vim link: $HOME/.config/nvim/init.vim"
+    rm -f "$HOME/.config/nvim/init.vim"
+fi
+
 # Use stow to create symbolic links for each configuration directory
 for dir in */; do
     if [ -d "$dir" ]; then
         print_status "Linking $dir"
-        stow --restow "$dir"
+        stow --target="$HOME" --restow "$dir"
     fi
 done
-
-# Special handling for profile files (they need to be in home directory root)
-if [ -d "profile" ]; then
-    print_status "Linking profile files"
-    stow --restow profile
-fi
 
 echo "=== ✅ Installation complete, restart terminal to take effect ==="
