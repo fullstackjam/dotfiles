@@ -4,12 +4,6 @@ cask_args appdir: '~/Applications', require_sha: true
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "blacktop/tap"
-tap "browsh-org/homebrew-browsh"
-tap "espanso/espanso"
-tap "jesseduffield/lazygit"
-tap "koekeishiya/formulae"
-tap "kdash-rs/kdash"
 tap "tencentcloud/tccli"
 
 # Essential CLI tools
