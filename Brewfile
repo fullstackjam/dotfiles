@@ -1,11 +1,5 @@
 cask_args appdir: '~/Applications', require_sha: true
 
-# Taps
-tap "homebrew/bundle"
-tap "homebrew/core"
-tap "homebrew/services"
-tap "tencentcloud/tccli"
-
 # Essential CLI tools
 brew "git"
 brew "zsh"
@@ -19,8 +13,6 @@ brew "yq"
 brew "tree"
 brew "htop"
 brew "fd"
-brew "aliyun-cli"
-brew "tccli"
 brew "rsync"
 brew "ssh-copy-id"
 brew "watch"
@@ -38,6 +30,7 @@ brew "awscli"
 brew "telnet"
 brew "ansible"
 brew "go"
+brew "uv"
 
 # Zsh plugins
 brew "zsh-syntax-highlighting"
