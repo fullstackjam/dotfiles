@@ -1,11 +1,9 @@
 cask_args appdir: '~/Applications', require_sha: true
 
 # Essential CLI tools
-brew "git"
 brew "zsh"
 brew "stow"
 brew "nvim"
-brew "vim"
 brew "curl"
 brew "wget"
 brew "jq"
@@ -55,9 +53,6 @@ cask "neteasemusic"
 # Development Tools
 cask "postman"
 cask "orbstack"
-
-# Security & Privacy
-cask "1password"
 
 # System Utilities
 cask "betterdisplay"
