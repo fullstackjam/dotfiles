@@ -37,6 +37,7 @@ brew "terraform"
 brew "awscli"
 brew "telnet"
 brew "ansible"
+brew "go"
 
 # Zsh plugins
 brew "zsh-syntax-highlighting"
