@@ -1,4 +1,15 @@
-# This Brewfile is used to manage Homebrew packages and applications.
+cask_args appdir: '~/Applications', require_sha: true
+
+# Taps
+tap "homebrew/bundle"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "blacktop/tap"
+tap "browsh-org/homebrew-browsh"
+tap "espanso/espanso"
+tap "jesseduffield/lazygit"
+tap "koekeishiya/formulae"
+tap "kdash-rs/kdash"
 tap "tencentcloud/tccli"
 
 # Essential CLI tools
@@ -6,6 +17,7 @@ brew "git"
 brew "zsh"
 brew "stow"
 brew "nvim"
+brew "vim"
 brew "curl"
 brew "wget"
 brew "jq"
@@ -15,6 +27,11 @@ brew "htop"
 brew "fd"
 brew "aliyun-cli"
 brew "tccli"
+brew "rsync"
+brew "ssh-copy-id"
+brew "watch"
+brew "openssl"
+brew "wrk"
 
 # Development tools
 brew "kubectl"
@@ -25,22 +42,39 @@ brew "nvm"
 brew "terraform"
 brew "awscli"
 brew "telnet"
+brew "ansible"
 
 # Zsh plugins
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
 
 # GUI applications
+
+# Terminal & Editors
 cask "warp"
-cask "1password"
-cask "betterdisplay"
-cask "wechat"
-cask "scroll-reverser"
 cask "visual-studio-code"
 cask "cursor"
-cask "postman"
+
+# Productivity
+cask "notion"
 cask "typora"
 cask "maccy"
-cask "notion"
-cask "orbstack"
+
+# Communication & Media
+cask "wechat"
 cask "neteasemusic"
+
+# Development Tools
+cask "postman"
+cask "orbstack"
+
+# Security & Privacy
+cask "1password"
+
+# System Utilities
+cask "betterdisplay"
+cask "scroll-reverser"
+
+# Network Tools
+cask "clash-verge-rev"
+cask "microsoft-edge"
