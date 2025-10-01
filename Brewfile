@@ -45,6 +45,7 @@ cask "cursor"
 cask "notion"
 cask "typora"
 cask "maccy"
+cask "picgo"
 
 # Communication & Media
 cask "wechat"
