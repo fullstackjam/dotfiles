@@ -16,6 +16,7 @@ brew "ssh-copy-id"
 brew "watch"
 brew "openssl"
 brew "wrk"
+brew "zola"
 
 # Development tools
 brew "kubectl"
