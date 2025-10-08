@@ -47,7 +47,6 @@ cask "notion"
 cask "typora"
 cask "maccy"
 cask "piclist"
-cask "logitech-options"
 
 # Communication & Media
 cask "wechat"
