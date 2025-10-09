@@ -51,6 +51,7 @@ cask "piclist"
 # Communication & Media
 cask "wechat"
 cask "neteasemusic"
+cask "telegram"
 
 # Development Tools
 cask "postman"
