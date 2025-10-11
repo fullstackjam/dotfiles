@@ -30,6 +30,7 @@ brew "telnet"
 brew "ansible"
 brew "go"
 brew "uv"
+brew "git-crypt"
 
 # Zsh plugins
 brew "zsh-syntax-highlighting"

@@ -1,0 +1,6 @@
+# Git-crypt configuration
+# Encrypt the entire .ssh directory
+.ssh/** filter=git-crypt diff=git-crypt
+.ssh/ filter=git-crypt diff=git-crypt
+
+.gitattributes !filter !diff

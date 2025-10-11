@@ -1,17 +1,6 @@
-# Sensitive information
-*.key
-*.pem
+# Sensitive information (excluding SSH files which are encrypted with git-crypt)
 *.p12
 *.pfx
-*.crt
-*.cer
-*.der
-id_rsa*
-id_dsa*
-id_ecdsa*
-id_ed25519*
-known_hosts
-authorized_keys
 
 # Environment files
 .env
