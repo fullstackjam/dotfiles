@@ -43,34 +43,6 @@ echo "=== 📦 Installing Brewfile packages ==="
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 # --------------------------
-# 3️⃣ Check and unlock git-crypt
-# --------------------------
-print_status "🔐 Checking git-crypt status"
-
-if command -v git-crypt &>/dev/null; then
-    # Check if git-crypt is initialized
-    if git-crypt status &>/dev/null; then
-        # Check if files are already unlocked
-        if git-crypt status | grep -q "encrypted"; then
-            print_status "🔓 Unlocking git-crypt encrypted files"
-
-            if ! git-crypt unlock; then
-                print_error "Failed to unlock git-crypt."
-                print_warning "Please run 'git-crypt unlock' manually and then re-run this install script."
-                exit 1
-            fi
-        else
-            print_status "Git-crypt files already unlocked ✅"
-        fi
-    else
-        print_warning "Git-crypt not initialized in this repository"
-    fi
-else
-    print_error "git-crypt not found. This should have been installed via Brewfile."
-    exit 1
-fi
-
-# --------------------------
 # 4️⃣ Install oh-my-zsh
 # --------------------------
 echo "=== 💻 Installing oh-my-zsh ==="
