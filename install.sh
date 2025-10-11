@@ -53,8 +53,10 @@ if command -v git-crypt &>/dev/null; then
         # Check if files are already unlocked
         if git-crypt status | grep -q "encrypted"; then
             print_status "🔓 Unlocking git-crypt encrypted files"
+
             if ! git-crypt unlock; then
-                print_error "Failed to unlock git-crypt. Make sure you have the correct GPG key."
+                print_error "Failed to unlock git-crypt."
+                print_warning "Please run 'git-crypt unlock' manually and then re-run this install script."
                 exit 1
             fi
         else
