@@ -75,69 +75,53 @@ run_command() {
     fi
 }
 
-# Function to install Homebrew if not installed
-install_homebrew() {
-    if ! command_exists brew; then
-        print_info "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        
-        # Setup Homebrew environment after installation
-        setup_homebrew_env
-        
-        print_success "Homebrew installed successfully!"
-        return 0
-    else
-        print_success "Homebrew is already installed"
-        return 0
-    fi
+# Function to install essential packages if not installed
+install_essential_packages() {
+    print_info "Installing essential packages..."
+    
+    # Update package list
+    run_command "sudo apt update" "Updating package list"
+    
+    # Install essential packages
+    local essential_packages="curl wget git stow zsh neovim"
+    run_command "sudo apt install -y $essential_packages" "Installing essential packages"
+    
+    print_success "Essential packages installed successfully!"
+    return 0
 }
 
-# Function to check if running on macOS
-is_macos() {
-    [[ "$OSTYPE" == "darwin"* ]]
+# Function to check if running on Ubuntu
+is_ubuntu() {
+    [[ -f /etc/os-release ]] && grep -q "Ubuntu" /etc/os-release
 }
 
-# Function to check if running on Apple Silicon
-is_apple_silicon() {
-    [[ $(uname -m) == "arm64" ]]
+# Function to check if running on ARM64
+is_arm64() {
+    [[ $(uname -m) == "aarch64" ]]
 }
 
-# Function to check if running on Intel Mac
-is_intel_mac() {
+# Function to check if running on x86_64
+is_x86_64() {
     [[ $(uname -m) == "x86_64" ]]
 }
 
-# Function to setup Homebrew environment
-setup_homebrew_env() {
-    local brew_path=""
-    local brew_shellenv=""
+# Function to setup Ubuntu environment
+setup_ubuntu_env() {
+    print_info "Setting up Ubuntu environment..."
     
-    if is_apple_silicon; then
-        brew_path="/opt/homebrew/bin/brew"
-        brew_shellenv='eval "$(/opt/homebrew/bin/brew shellenv)"'
-        print_info "Setting up Homebrew environment for Apple Silicon..."
-    elif is_intel_mac; then
-        brew_path="/usr/local/bin/brew"
-        brew_shellenv='eval "$(/usr/local/bin/brew shellenv)"'
-        print_info "Setting up Homebrew environment for Intel Mac..."
+    # Add snap to PATH if not already there
+    if ! grep -q "/snap/bin" ~/.zprofile 2>/dev/null; then
+        echo 'export PATH="/snap/bin:$PATH"' >> ~/.zprofile
+        print_info "Added snap to PATH in ~/.zprofile"
     else
-        print_warning "Unsupported architecture for Homebrew setup"
-        return 1
+        print_info "snap already configured in ~/.zprofile"
     fi
     
-    # Check if Homebrew shellenv is already in .zprofile
-    if ! grep -q "brew shellenv" ~/.zprofile 2>/dev/null; then
-        echo "$brew_shellenv" >> ~/.zprofile
-        print_info "Added Homebrew to ~/.zprofile"
-    else
-        print_info "Homebrew already configured in ~/.zprofile"
-    fi
-    
-    # Apply Homebrew environment to current session
-    eval "$brew_shellenv"
+    # Add snap to current session
+    export PATH="/snap/bin:$PATH"
 }
 
 # Export functions so they can be used by other scripts
 export -f print_info print_success print_warning print_error print_step print_header
 export -f command_exists directory_exists file_exists get_dotfiles_dir run_command
-export -f install_homebrew is_macos is_apple_silicon is_intel_mac setup_homebrew_env
+export -f install_essential_packages is_ubuntu is_arm64 is_x86_64 setup_ubuntu_env

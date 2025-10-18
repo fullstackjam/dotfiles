@@ -11,8 +11,7 @@ all: help
 .PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  homebrew    - Install Homebrew"
-	@echo "  brewfile    - Install packages from Brewfile"
+	@echo "  packages    - Install packages from packages.txt"
 	@echo "  oh-my-zsh   - Install Oh My Zsh and plugins"
 	@echo "  stow        - Deploy all dotfiles"
 	@echo "  stow-git    - Deploy Git config only"
@@ -26,12 +25,9 @@ help:
 	@echo "  setup       - Complete setup (install + deploy)"
 
 # Installation
-.PHONY: homebrew brewfile oh-my-zsh
-homebrew:
-	@bash $(SCRIPTS_DIR)/01-homebrew.sh
-
-brewfile:
-	@bash $(SCRIPTS_DIR)/02-brewfile.sh
+.PHONY: packages oh-my-zsh
+packages:
+	@bash $(SCRIPTS_DIR)/01-packages.sh
 
 oh-my-zsh:
 	@bash $(SCRIPTS_DIR)/03-oh-my-zsh.sh
@@ -63,7 +59,7 @@ cleanup:
 
 # Full setup
 .PHONY: install deploy setup
-install: homebrew brewfile oh-my-zsh
+install: packages oh-my-zsh
 
 deploy: stow
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to clean up duplicate Homebrew configurations in .zprofile
+# Script to clean up duplicate PATH configurations in .zprofile
 
 ZPROFILE="$HOME/.zprofile"
 BACKUP="$HOME/.zprofile.backup.$(date +%Y%m%d_%H%M%S)"
@@ -27,28 +27,25 @@ fi
 cp "$ZPROFILE" "$BACKUP"
 print_info "Created backup: $BACKUP"
 
-# Count duplicate lines
-brew_lines=$(grep -c "brew shellenv" "$ZPROFILE" 2>/dev/null || echo "0")
+# Count duplicate PATH lines
+snap_lines=$(grep -c "/snap/bin" "$ZPROFILE" 2>/dev/null || echo "0")
+local_lines=$(grep -c "\$HOME/.local/bin" "$ZPROFILE" 2>/dev/null || echo "0")
 
-if [ "$brew_lines" -le 1 ]; then
-    print_success "No duplicate Homebrew configurations found"
+if [ "$snap_lines" -le 1 ] && [ "$local_lines" -le 1 ]; then
+    print_success "No duplicate PATH configurations found"
     rm "$BACKUP"
     exit 0
 fi
 
-print_warning "Found $brew_lines duplicate Homebrew configurations"
+print_warning "Found duplicate PATH configurations (snap: $snap_lines, local: $local_lines)"
 
-# Remove all brew shellenv lines
-sed -i '' '/brew shellenv/d' "$ZPROFILE"
+# Remove duplicate PATH lines
+sed -i '/\/snap\/bin/d' "$ZPROFILE"
+sed -i '/\$HOME\/.local\/bin/d' "$ZPROFILE"
 
-# Add single Homebrew configuration
-if [[ $(uname -m) == "arm64" ]]; then
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$ZPROFILE"
-    print_info "Added Apple Silicon Homebrew configuration"
-else
-    echo 'eval "$(/usr/local/bin/brew shellenv)"' >> "$ZPROFILE"
-    print_info "Added Intel Mac Homebrew configuration"
-fi
+# Add single PATH configuration
+echo 'export PATH="/snap/bin:$PATH"' >> "$ZPROFILE"
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$ZPROFILE"
 
-print_success "Cleaned up duplicate Homebrew configurations"
+print_success "Cleaned up duplicate PATH configurations"
 print_info "Backup saved at: $BACKUP"

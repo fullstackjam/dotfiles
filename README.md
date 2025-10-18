@@ -1,6 +1,6 @@
 # Dotfiles
 
-A clean, modular dotfiles management system using GNU Stow and Make.
+A clean, modular dotfiles management system using GNU Stow and Make, adapted for Ubuntu.
 
 ## 🚀 Quick Start
 
@@ -18,8 +18,7 @@ make install     # Install software only
 make deploy      # Deploy dotfiles only
 
 # Modular options
-make homebrew    # Install Homebrew
-make brewfile    # Install packages
+make packages    # Install packages from packages.txt
 make oh-my-zsh   # Install Oh My Zsh + plugins
 make stow-git    # Deploy Git config only
 make stow-zsh    # Deploy Zsh config only
@@ -33,7 +32,7 @@ make help        # Show all commands
 
 ## 📦 What's Included
 
-- **Homebrew** package manager
+- **APT/Snap** package management
 - **Oh My Zsh** with syntax highlighting & autosuggestions
 - **Git** configuration with useful aliases
 - **Zsh** shell configuration
@@ -52,13 +51,13 @@ dotfiles/
 ├── nvm/                  # Node.js version
 ├── ssh/                  # SSH configuration
 ├── nvim/                 # Neovim configuration
-└── Brewfile              # Homebrew packages
+└── packages.txt          # Ubuntu packages list
 ```
 
 ## 🔧 Customization
 
 **Configure Git**: Edit `git/.gitconfig` and uncomment/update name/email
-**Add packages**: Edit `Brewfile`
+**Add packages**: Edit `packages.txt`
 **Modify configs**: Edit files in respective directories
 **Add new configs**: Create new directory and update `scripts/04-stow.sh`
 

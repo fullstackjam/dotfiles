@@ -15,7 +15,7 @@ DOTFILES_DIR=$(get_dotfiles_dir)
 # Check if stow is installed
 if ! command_exists stow; then
     print_error "GNU Stow is not installed! Please install it first:"
-    print_info "brew install stow"
+    print_info "sudo apt install stow"
     exit 1
 fi
 

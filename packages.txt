@@ -1,0 +1,22 @@
+# Essential CLI tools for Ubuntu (官方源中的基本软件)
+# Core utilities
+zsh
+stow
+neovim
+curl
+wget
+jq
+tree
+htop
+rsync
+openssh-client
+watch
+openssl
+telnet
+golang-go
+
+# Development tools
+kubectl
+helm
+terraform
+awscli
