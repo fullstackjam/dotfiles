@@ -23,7 +23,7 @@ help:
 	@echo "  setup       - Complete setup (install + deploy)"
 
 # Installation
-.PHONY: homebrew brewfile oh-my-zsh
+.PHONY: homebrew brewfile
 homebrew:
 	@bash $(SCRIPTS_DIR)/01-homebrew.sh
 
@@ -34,20 +34,21 @@ brewfile: homebrew
 # Deployment
 .PHONY: stow stow-git stow-zsh stow-nvm stow-ssh stow-nvim
 stow:
-	@bash $(SCRIPTS_DIR)/04-stow.sh
+	@bash $(SCRIPTS_DIR)/03-stow.sh
 
 stow-git:
-	@bash $(SCRIPTS_DIR)/04-stow.sh git
+	@bash $(SCRIPTS_DIR)/03-stow.sh git
 
 
 stow-nvm:
-	@bash $(SCRIPTS_DIR)/04-stow.sh nvm
+	@bash $(SCRIPTS_DIR)/03-stow.sh nvm
 
 stow-ssh:
-	@bash $(SCRIPTS_DIR)/04-stow.sh ssh
+	@bash $(SCRIPTS_DIR)/03-stow.sh ssh
 
 stow-nvim:
-	@bash $(SCRIPTS_DIR)/04-stow.sh nvim
+	@bash $(SCRIPTS_DIR)/03-stow.sh nvim
+
 
 
 # Full setup

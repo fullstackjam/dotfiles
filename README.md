@@ -60,7 +60,7 @@ dotfiles/
 **Configure Git**: Edit `git/.gitconfig` and uncomment/update name/email
 **Add packages**: Edit `Brewfile`
 **Modify configs**: Edit files in respective directories
-**Add new configs**: Create new directory and update `scripts/04-stow.sh`
+**Add new configs**: Create new directory and update `scripts/03-stow.sh`
 
 ## 📄 License
 

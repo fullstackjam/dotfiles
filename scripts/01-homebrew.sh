@@ -15,10 +15,7 @@ if ! is_macos; then
     exit 1
 fi
 
-# Install Homebrew
+# Install Homebrew (includes environment setup)
 install_homebrew
-
-# Setup Homebrew environment
-setup_homebrew_env
 
 print_success "Homebrew installation completed!"

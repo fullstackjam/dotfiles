@@ -1,5 +1,5 @@
 #!/bin/bash
-# 04-stow.sh - Deploy dotfiles using GNU Stow
+# 03-stow.sh - Deploy dotfiles using GNU Stow
 
 set -e
 

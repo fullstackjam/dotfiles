@@ -88,6 +88,8 @@ install_homebrew() {
         return 0
     else
         print_success "Homebrew is already installed"
+        # Still setup environment to ensure it's properly configured
+        setup_homebrew_env
         return 0
     fi
 }
@@ -130,9 +132,9 @@ setup_homebrew_env() {
     if [ ! -f "$zprofile_path" ]; then
         touch "$zprofile_path"
         print_info "Created $zprofile_path"
-    fi
-    
-    if ! grep -q "brew shellenv" "$zprofile_path" 2>/dev/null; then
+        echo "$brew_shellenv" >> "$zprofile_path"
+        print_info "Added Homebrew to $zprofile_path"
+    elif ! grep -q "brew shellenv" "$zprofile_path" 2>/dev/null; then
         echo "$brew_shellenv" >> "$zprofile_path"
         print_info "Added Homebrew to $zprofile_path"
     else
