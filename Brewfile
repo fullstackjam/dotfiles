@@ -29,11 +29,8 @@ brew "uv"
 brew "wireguard-tools"
 brew "age"
 
-# Zsh plugins
-brew "zsh-syntax-highlighting"
-brew "zsh-autosuggestions"
-
 # GUI applications
+cask "microsoft-office"
 cask "warp"
 cask "visual-studio-code"
 cask "cursor"
@@ -52,7 +49,6 @@ cask "scroll-reverser"
 cask "clash-verge-rev"
 cask "microsoft-edge"
 cask "1password"
-cask "microsoft-office"
 cask "lark"
 cask "balenaetcher"
 cask "chatgpt"

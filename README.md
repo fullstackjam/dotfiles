@@ -20,24 +20,19 @@ make deploy      # Deploy dotfiles only
 # Modular options
 make homebrew    # Install Homebrew
 make brewfile    # Install packages
-make oh-my-zsh   # Install Oh My Zsh + plugins
 make stow-git    # Deploy Git config only
-make stow-zsh    # Deploy Zsh config only
 make stow-nvm    # Deploy NVM config only
 make stow-ssh    # Deploy SSH config only
 make stow-nvim   # Deploy Neovim config only
-make cleanup     # Clean up duplicate configurations
 
 make help        # Show all commands
 ```
 
 ## 📦 What's Included
 
-- **Homebrew** package manager
-- **Oh My Zsh** with syntax highlighting & autosuggestions
-- **Git** configuration with useful aliases
-- **Zsh** shell configuration
-- **SSH** client optimization
+- **Homebrew** package manager with 50+ packages
+- **Git** configuration with useful aliases and colors
+- **SSH** client optimization for GitHub and general use
 - **NVM** Node.js version management
 - **Neovim** modern editor with essential plugins
 
@@ -48,8 +43,7 @@ dotfiles/
 ├── Makefile              # Main interface
 ├── scripts/              # Modular installation scripts
 ├── git/                  # Git configuration
-├── zsh/                  # Zsh configuration
-├── nvm/                  # Node.js version
+├── nvm/                  # Node.js version management
 ├── ssh/                  # SSH configuration
 ├── nvim/                 # Neovim configuration
 └── Brewfile              # Homebrew packages
