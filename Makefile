@@ -32,7 +32,7 @@ brewfile: homebrew
 
 
 # Deployment
-.PHONY: stow stow-git stow-zsh stow-nvm stow-ssh stow-nvim
+.PHONY: stow stow-git stow-nvm stow-ssh stow-nvim
 stow:
 	@bash $(SCRIPTS_DIR)/03-stow.sh
 

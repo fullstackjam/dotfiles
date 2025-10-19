@@ -1,5 +1,4 @@
 # Essential CLI tools
-brew "zsh"
 brew "stow"
 brew "nvim"
 brew "curl"

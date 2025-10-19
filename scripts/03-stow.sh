@@ -56,5 +56,4 @@ else
         fi
     done
     print_success "All dotfiles deployed successfully!"
-    print_info "You may need to reload your shell: source ~/.zshrc"
 fi
