@@ -126,11 +126,17 @@ setup_homebrew_env() {
     fi
     
     # Check if Homebrew shellenv is already in .zprofile
-    if ! grep -q "brew shellenv" ~/.zprofile 2>/dev/null; then
-        echo "$brew_shellenv" >> ~/.zprofile
-        print_info "Added Homebrew to ~/.zprofile"
+    local zprofile_path="$HOME/.zprofile"
+    if [ ! -f "$zprofile_path" ]; then
+        touch "$zprofile_path"
+        print_info "Created $zprofile_path"
+    fi
+    
+    if ! grep -q "brew shellenv" "$zprofile_path" 2>/dev/null; then
+        echo "$brew_shellenv" >> "$zprofile_path"
+        print_info "Added Homebrew to $zprofile_path"
     else
-        print_info "Homebrew already configured in ~/.zprofile"
+        print_info "Homebrew already configured in $zprofile_path"
     fi
     
     # Apply Homebrew environment to current session

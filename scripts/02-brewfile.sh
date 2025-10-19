@@ -12,10 +12,36 @@ print_header "Installing packages from Brewfile"
 # Get dotfiles directory
 DOTFILES_DIR=$(get_dotfiles_dir)
 
-# Check if Homebrew is installed
+# Check if Homebrew is installed and load environment
 if ! command_exists brew; then
-    print_error "Homebrew is not installed! Please run 01-homebrew.sh first."
-    exit 1
+    print_info "Homebrew not found in PATH, attempting to load environment..."
+    
+    # Try to load Homebrew environment
+    if [[ $(uname -m) == "arm64" ]]; then
+        # Apple Silicon
+        if [ -f "/opt/homebrew/bin/brew" ]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+            print_info "Loaded Homebrew environment for Apple Silicon"
+        else
+            print_error "Homebrew is not installed! Please run 01-homebrew.sh first."
+            exit 1
+        fi
+    else
+        # Intel Mac
+        if [ -f "/usr/local/bin/brew" ]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+            print_info "Loaded Homebrew environment for Intel Mac"
+        else
+            print_error "Homebrew is not installed! Please run 01-homebrew.sh first."
+            exit 1
+        fi
+    fi
+    
+    # Verify brew is now available
+    if ! command_exists brew; then
+        print_error "Failed to load Homebrew environment!"
+        exit 1
+    fi
 fi
 
 # Check if Brewfile exists

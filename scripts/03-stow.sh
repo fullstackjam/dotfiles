@@ -23,7 +23,7 @@ fi
 cd "$DOTFILES_DIR"
 
 # Define packages to deploy
-PACKAGES=("git" "zsh" "nvm" "ssh" "nvim")
+PACKAGES=("git" "nvm" "ssh" "nvim")
 
 # Handle command line arguments
 if [ -n "$1" ]; then
@@ -31,7 +31,7 @@ if [ -n "$1" ]; then
     package="$1"
     if directory_exists "$package"; then
         print_info "Deploying $package configuration..."
-        if stow --target="$HOME" "$package"; then
+        if stow --adopt --target="$HOME" "$package"; then
             print_success "$package configuration deployed successfully!"
         else
             print_error "Failed to deploy $package configuration!"
@@ -45,7 +45,7 @@ else
     for package in "${PACKAGES[@]}"; do
         if directory_exists "$package"; then
             print_info "Deploying $package configuration..."
-            if stow --target="$HOME" "$package"; then
+            if stow --adopt --target="$HOME" "$package"; then
                 print_success "$package configuration deployed successfully!"
             else
                 print_error "Failed to deploy $package configuration!"
