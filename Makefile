@@ -13,6 +13,7 @@ help:
 	@echo "Available targets:"
 	@echo "  homebrew    - Install Homebrew"
 	@echo "  brewfile    - Install packages from Brewfile"
+	@echo "  nvm         - Install nvm (Node Version Manager)"
 	@echo "  stow        - Deploy all dotfiles"
 	@echo "  stow-git    - Deploy Git config only"
 	@echo "  stow-nvm    - Deploy NVM config only"
@@ -23,12 +24,15 @@ help:
 	@echo "  setup       - Complete setup (install + deploy)"
 
 # Installation
-.PHONY: homebrew brewfile
+.PHONY: homebrew brewfile nvm
 homebrew:
 	@bash $(SCRIPTS_DIR)/01-homebrew.sh
 
 brewfile: homebrew
 	@bash $(SCRIPTS_DIR)/02-brewfile.sh
+
+nvm:
+	@bash $(SCRIPTS_DIR)/install-nvm.sh
 
 
 # Deployment
