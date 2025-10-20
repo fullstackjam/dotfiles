@@ -1,5 +1,5 @@
-" Neovim Configuration
-" A clean, modern setup with essential plugins
+" Minimal Neovim Configuration
+" No plugins, essential settings only
 
 " Basic settings
 set number
@@ -87,74 +87,3 @@ augroup filetype_settings
     autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
     autocmd FileType markdown setlocal wrap linebreak
 augroup END
-
-" Plugin manager (vim-plug)
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.local/share/nvim/plugged')
-
-" Essential plugins
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-
-" File navigation
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" Git integration
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" Syntax and language support
-Plug 'sheerun/vim-polyglot'
-
-" Status line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Colorschemes
-Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
-
-call plug#end()
-
-" Plugin configurations
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'onedark'
-
-" FZF configuration
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>g :Rg<CR>
-
-" Git configurations
-nnoremap <leader>gs :Git<CR>
-nnoremap <leader>gc :Git commit<CR>
-nnoremap <leader>gp :Git push<CR>
-nnoremap <leader>gl :Git log<CR>
-
-" GitGutter configuration
-let g:gitgutter_enabled = 1
-let g:gitgutter_map_keys = 0
-nnoremap <leader>gn :GitGutterNextHunk<CR>
-nnoremap <leader>gp :GitGutterPrevHunk<CR>
-nnoremap <leader>gh :GitGutterPreviewHunk<CR>
-
-" Colorscheme settings
-if has('termguicolors')
-    set termguicolors
-endif
-
-" Enable gruvbox colorscheme
-try
-    colorscheme gruvbox
-    set background=dark
-catch
-    colorscheme default
-endtry
