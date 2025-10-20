@@ -1,4 +1,5 @@
 # Essential CLI tools
+# Note: This Brewfile is configured to use Tsinghua mirrors for faster downloads in China
 brew "stow"
 brew "nvim"
 brew "curl"
@@ -51,3 +52,4 @@ cask "1password"
 cask "lark"
 cask "balenaetcher"
 cask "chatgpt"
+cask "google-chrome"
