@@ -23,7 +23,7 @@ fi
 cd "$DOTFILES_DIR"
 
 # Define packages to deploy
-PACKAGES=("git" "nvm" "ssh" "nvim")
+PACKAGES=("git" "nvm" "ssh" "nvim" "zsh")
 
 # Handle command line arguments
 if [ -n "$1" ]; then
