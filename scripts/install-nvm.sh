@@ -11,12 +11,13 @@ print_header "Installing nvm (Node Version Manager)"
 
 # Check if nvm is already installed
 if [ -d "$HOME/.nvm" ]; then
-    print_info "nvm is already installed, updating to latest version..."
-    # Update nvm to latest version
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    print_info "nvm is already installed, do nothing..."
 else
     print_info "Installing nvm from official script..."
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash || {
+        print_error "Failed to install nvm"
+        exit 1
+    }
 fi
 
 # Source nvm in current session
@@ -49,17 +50,10 @@ fi
 
 # Install latest LTS Node.js if not already installed
 print_info "Checking for latest LTS Node.js..."
-if ! nvm list | grep -q "lts"; then
-    print_info "Installing latest LTS Node.js..."
-    nvm install --lts
-    nvm use --lts
-    nvm alias default lts/*
-else
-    print_info "LTS Node.js is already installed"
-    nvm use --lts
-fi
+nvm install
 
 print_success "nvm installation completed!"
 print_info "You can now use 'nvm install <version>' to install specific Node.js versions"
 print_info "Use 'nvm list' to see installed versions"
 print_info "Use 'nvm use <version>' to switch between versions"
+print_info "nvm will automatically use .nvmrc file if present in your project directory"

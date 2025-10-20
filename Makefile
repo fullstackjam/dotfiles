@@ -57,7 +57,7 @@ stow-nvim:
 
 # Full setup
 .PHONY: install deploy setup
-install: homebrew brewfile
+install: homebrew brewfile nvm
 
 deploy: stow
 
