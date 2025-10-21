@@ -76,6 +76,12 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Java Development Kit
+if [ -d "/opt/homebrew/opt/openjdk" ]; then
+    export JAVA_HOME=/opt/homebrew/opt/openjdk
+    export PATH="$JAVA_HOME/bin:$PATH"
+fi
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
