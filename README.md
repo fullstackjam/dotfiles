@@ -1,6 +1,6 @@
 # Dotfiles
 
-A clean, modular dotfiles management system using GNU Stow and Make.
+A minimal setup for provisioning a new macOS machine with a few Homebrew apps and your SSH configuration.
 
 ## 🚀 Quick Start
 
@@ -13,48 +13,40 @@ make setup
 ## 📋 Commands
 
 ```bash
-make setup       # Complete installation + deployment
-make install     # Install software only
-make deploy      # Deploy dotfiles only
+make setup      # Install Homebrew, Brewfile packages, link SSH config, and apply macOS prefs
 
 # Modular options
-make homebrew    # Install Homebrew
-make brewfile    # Install packages
-make stow-git    # Deploy Git config only
-make stow-nvm    # Deploy NVM config only
-make stow-ssh    # Deploy SSH config only
-make stow-nvim   # Deploy Neovim config only
+make homebrew   # Install Homebrew
+make brewfile   # Install packages from Brewfile
+make link-ssh   # Symlink ssh/.ssh/config to ~/.ssh/config
+make macos      # Apply Dock, trackpad, and login item settings
 
-make help        # Show all commands
+make help       # Show all commands
 ```
 
 ## 📦 What's Included
 
-- **Homebrew** package manager with 50+ packages
-- **Git** configuration with useful aliases and colors
-- **SSH** client optimization for GitHub and general use
-- **NVM** Node.js version management
-- **Neovim** modern editor with essential plugins
+- **Homebrew** bootstrap script
+- **Brewfile** with a curated set of GUI tools
+- **SSH** configuration (symlinked into place)
+- **macOS preferences** script (Dock, Trackpad, login items)
 
-## 🏗️ Architecture
+## 🏗️ Structure
 
 ```
 dotfiles/
-├── Makefile              # Main interface
-├── scripts/              # Modular installation scripts
-├── git/                  # Git configuration
-├── nvm/                  # Node.js version management
-├── ssh/                  # SSH configuration
-├── nvim/                 # Neovim configuration
-└── Brewfile              # Homebrew packages
+├── Brewfile              # Homebrew packages
+├── Makefile              # Minimal task runner
+├── scripts/              # Installation/link scripts
+└── ssh/                  # SSH configuration to be linked
 ```
 
 ## 🔧 Customization
 
-**Configure Git**: Edit `git/.gitconfig` and uncomment/update name/email
-**Add packages**: Edit `Brewfile`
-**Modify configs**: Edit files in respective directories
-**Add new configs**: Create new directory and update `scripts/03-stow.sh`
+- Edit `Brewfile` to add or remove Homebrew packages
+- Update `ssh/.ssh/config` with your preferred hosts
+- Adjust `scripts/03-link-ssh.sh` if you want a different linking strategy
+- Adjust `scripts/04-configure-macos.sh` to tweak Dock/Trackpad/login items
 
 ## 📄 License
 
