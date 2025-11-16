@@ -1,8 +1,5 @@
 # Essential macOS CLI tools
-brew "colima"         # Core virtualization
-brew "kubectl"        # Required by colima
 brew "curl"
-brew "fd"
 brew "htop"
 brew "jq"
 brew "rsync"
@@ -30,6 +27,7 @@ cask "microsoft-edge"
 cask "microsoft-office"
 cask "neteasemusic"
 cask "notion"
+cask "orbstack"
 cask "piclist"
 cask "postman"
 cask "scroll-reverser"
