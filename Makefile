@@ -68,8 +68,8 @@ stow-zsh:
 
 # Full setup
 .PHONY: install deploy setup
-install: homebrew brewfile nvm oh-my-zsh
+install: homebrew brewfile
 
-deploy: stow
+deploy: stow nvm oh-my-zsh
 
 setup: install deploy configure
