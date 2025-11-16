@@ -11,22 +11,23 @@ all: help
 .PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  homebrew    - Install Homebrew"
-	@echo "  brewfile    - Install packages from Brewfile"
-	@echo "  nvm         - Install nvm (Node Version Manager)"
-	@echo "  oh-my-zsh   - Install Oh My ZSH with plugins"
-	@echo "  stow        - Deploy all dotfiles"
-	@echo "  stow-git    - Deploy Git config only"
-	@echo "  stow-nvm    - Deploy NVM config only"
-	@echo "  stow-ssh    - Deploy SSH config only"
-	@echo "  stow-nvim   - Deploy Neovim config only"
-	@echo "  stow-zsh    - Deploy ZSH config only"
-	@echo "  install     - Run full installation"
-	@echo "  deploy      - Deploy all dotfiles"
-	@echo "  setup       - Complete setup (install + deploy)"
+	@echo "  homebrew      - Install Homebrew"
+	@echo "  brewfile      - Install packages from Brewfile"
+	@echo "  nvm           - Install nvm (Node Version Manager)"
+	@echo "  oh-my-zsh     - Install Oh My ZSH with plugins"
+	@echo "  configure     - Configure macOS preferences (Dock, Trackpad, Login Items)"
+	@echo "  stow          - Deploy all dotfiles"
+	@echo "  stow-git      - Deploy Git config only"
+	@echo "  stow-nvm      - Deploy NVM config only"
+	@echo "  stow-ssh      - Deploy SSH config only"
+	@echo "  stow-nvim     - Deploy Neovim config only"
+	@echo "  stow-zsh      - Deploy ZSH config only"
+	@echo "  install       - Run full installation"
+	@echo "  deploy        - Deploy all dotfiles"
+	@echo "  setup         - Complete setup (install + deploy + configure)"
 
 # Installation
-.PHONY: homebrew brewfile nvm oh-my-zsh
+.PHONY: homebrew brewfile nvm oh-my-zsh configure
 homebrew:
 	@bash $(SCRIPTS_DIR)/01-homebrew.sh
 
@@ -38,6 +39,9 @@ nvm:
 
 oh-my-zsh:
 	@bash $(SCRIPTS_DIR)/install-oh-my-zsh.sh
+
+configure:
+	@bash $(SCRIPTS_DIR)/04-configure-macos.sh
 
 
 # Deployment
@@ -68,4 +72,4 @@ install: homebrew brewfile nvm oh-my-zsh
 
 deploy: stow
 
-setup: install deploy
+setup: install deploy configure
