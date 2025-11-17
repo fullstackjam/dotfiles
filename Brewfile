@@ -1,5 +1,7 @@
 # Essential macOS CLI tools
 brew "curl"
+brew "helm"
+brew "kubectl"
 brew "htop"
 brew "jq"
 brew "rsync"
