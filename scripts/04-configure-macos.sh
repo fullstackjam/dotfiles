@@ -21,6 +21,26 @@ defaults write com.apple.dock autohide -bool false
 defaults write com.apple.dock "show-recents" -bool false
 defaults write com.apple.dock tilesize -int 38
 
+# Set Dock apps
+print_info "Configuring Dock apps..."
+defaults delete com.apple.dock persistent-apps 2>/dev/null || true
+
+DOCK_APPS=(
+    "/Applications/Microsoft Edge.app"
+    "/Applications/Warp.app"
+    "/Applications/Visual Studio Code.app"
+    "/Applications/ChatGPT.app"
+    "/Applications/WeChat.app"
+)
+
+for app in "${DOCK_APPS[@]}"; do
+    if [ -d "$app" ]; then
+        defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+    else
+        print_warning "App not found: $app"
+    fi
+done
+
 # -----------------------------
 # Desktop & Stage Manager configuration
 # -----------------------------
