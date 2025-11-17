@@ -21,6 +21,13 @@ defaults write com.apple.dock autohide -bool false
 defaults write com.apple.dock "show-recents" -bool false
 defaults write com.apple.dock tilesize -int 38
 
+# -----------------------------
+# Desktop & Stage Manager configuration
+# -----------------------------
+print_info "Configuring Desktop & Stage Manager..."
+# Show Desktop: Only in Stage Manager on Click
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+
 # Restart Dock to apply changes
 killall Dock >/dev/null 2>&1 || true
 
