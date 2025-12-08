@@ -17,7 +17,6 @@ help:
 	@echo "  configure     - Configure macOS preferences (Dock, Trackpad, Login Items)"
 	@echo "  stow          - Deploy all dotfiles"
 	@echo "  stow-git      - Deploy Git config only"
-	@echo "  stow-nvm      - Deploy NVM config only"
 	@echo "  stow-ssh      - Deploy SSH config only"
 	@echo "  stow-zsh      - Deploy ZSH config only"
 	@echo "  install       - Run full installation"
@@ -25,15 +24,12 @@ help:
 	@echo "  setup         - Complete setup (install + deploy + configure)"
 
 # Installation
-.PHONY: homebrew brewfile nvm oh-my-zsh configure
+.PHONY: homebrew brewfile oh-my-zsh configure
 homebrew:
 	@bash $(SCRIPTS_DIR)/01-homebrew.sh
 
 brewfile: homebrew
 	@bash $(SCRIPTS_DIR)/02-brewfile.sh
-
-nvm:
-	@bash $(SCRIPTS_DIR)/install-nvm.sh
 
 oh-my-zsh:
 	@bash $(SCRIPTS_DIR)/install-oh-my-zsh.sh
@@ -43,7 +39,7 @@ configure:
 
 
 # Deployment
-.PHONY: stow stow-git stow-nvm stow-ssh stow-nvim stow-zsh
+.PHONY: stow stow-git stow-ssh stow-zsh
 stow:
 	@bash $(SCRIPTS_DIR)/03-stow.sh
 
@@ -64,6 +60,6 @@ stow-zsh:
 .PHONY: install deploy setup
 install: homebrew brewfile
 
-deploy: stow nvm oh-my-zsh
+deploy: stow oh-my-zsh
 
 setup: install deploy configure

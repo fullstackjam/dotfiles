@@ -21,9 +21,7 @@ make deploy      # Deploy dotfiles only
 make homebrew    # Install Homebrew
 make brewfile    # Install packages
 make stow-git    # Deploy Git config only
-make stow-nvm    # Deploy NVM config only
 make stow-ssh    # Deploy SSH config only
-make stow-nvim   # Deploy Neovim config only
 
 make help        # Show all commands
 ```
@@ -33,8 +31,6 @@ make help        # Show all commands
 - **Homebrew** package manager with 50+ packages
 - **Git** configuration with useful aliases and colors
 - **SSH** client optimization for GitHub and general use
-- **NVM** Node.js version management
-- **Neovim** modern editor with essential plugins
 
 ## 🏗️ Architecture
 
@@ -43,9 +39,7 @@ dotfiles/
 ├── Makefile              # Main interface
 ├── scripts/              # Modular installation scripts
 ├── git/                  # Git configuration
-├── nvm/                  # Node.js version management
 ├── ssh/                  # SSH configuration
-├── nvim/                 # Neovim configuration
 └── Brewfile              # Homebrew packages
 ```
 

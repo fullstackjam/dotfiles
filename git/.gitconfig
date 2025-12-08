@@ -3,7 +3,7 @@
 	email = fullstackjam@outlook.com
 
 [core]
-    editor = nvim
+    editor = vim
     autocrlf = input
     safecrlf = false
 
