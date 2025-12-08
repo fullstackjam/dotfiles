@@ -13,14 +13,12 @@ help:
 	@echo "Available targets:"
 	@echo "  homebrew      - Install Homebrew"
 	@echo "  brewfile      - Install packages from Brewfile"
-	@echo "  nvm           - Install nvm (Node Version Manager)"
 	@echo "  oh-my-zsh     - Install Oh My ZSH with plugins"
 	@echo "  configure     - Configure macOS preferences (Dock, Trackpad, Login Items)"
 	@echo "  stow          - Deploy all dotfiles"
 	@echo "  stow-git      - Deploy Git config only"
 	@echo "  stow-nvm      - Deploy NVM config only"
 	@echo "  stow-ssh      - Deploy SSH config only"
-	@echo "  stow-nvim     - Deploy Neovim config only"
 	@echo "  stow-zsh      - Deploy ZSH config only"
 	@echo "  install       - Run full installation"
 	@echo "  deploy        - Deploy all dotfiles"
@@ -52,14 +50,10 @@ stow:
 stow-git:
 	@bash $(SCRIPTS_DIR)/03-stow.sh git
 
-stow-nvm:
-	@bash $(SCRIPTS_DIR)/03-stow.sh nvm
 
 stow-ssh:
 	@bash $(SCRIPTS_DIR)/03-stow.sh ssh
 
-stow-nvim:
-	@bash $(SCRIPTS_DIR)/03-stow.sh nvim
 
 stow-zsh:
 	@bash $(SCRIPTS_DIR)/03-stow.sh zsh
