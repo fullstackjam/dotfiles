@@ -1,5 +1,9 @@
+# Third-party taps
+tap "tencentcloud/tccli"
+
 # Essential macOS CLI tools
 brew "argocd"
+brew "awscli"
 brew "curl"
 brew "gh"
 brew "helm"
@@ -8,6 +12,8 @@ brew "jq"
 brew "kubectl"
 brew "kubectl-argo-rollouts"
 brew "neovim"
+brew "tccli"
+brew "terraform"
 brew "rsync"
 brew "ssh-copy-id"
 brew "stow"
@@ -18,6 +24,7 @@ brew "wget"
 brew "wireguard-tools"
 brew "wrk"
 brew "zola"
+brew "codex"
 
 # GUI applications
 cask "1password"

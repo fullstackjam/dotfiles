@@ -27,10 +27,10 @@ defaults delete com.apple.dock persistent-apps 2>/dev/null || true
 
 DOCK_APPS=(
     "/Applications/Microsoft Edge.app"
-    "/Applications/Warp.app"
     "/Applications/Visual Studio Code.app"
+    "/Applications/Antigravity.app"
+    "/Applications/Warp.app"
     "/Applications/ChatGPT.app"
-    "/Applications/WeChat.app"
 )
 
 for app in "${DOCK_APPS[@]}"; do
