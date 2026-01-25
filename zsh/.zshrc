@@ -70,17 +70,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git helm kubectl zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# Java Development Kit
-if [ -d "/opt/homebrew/opt/openjdk" ]; then
-    export JAVA_HOME=/opt/homebrew/opt/openjdk
-    export PATH="$JAVA_HOME/bin:$PATH"
-fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -109,6 +103,5 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# AI CLI Tools
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+# Added by Antigravity
+export PATH="/Users/fullstackjam/.antigravity/antigravity/bin:$PATH"
