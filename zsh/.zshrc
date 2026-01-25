@@ -105,3 +105,4 @@ source $ZSH/oh-my-zsh.sh
 
 # Added by Antigravity
 export PATH="/Users/fullstackjam/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
