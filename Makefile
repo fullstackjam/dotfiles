@@ -13,23 +13,27 @@ help:
 	@echo "Available targets:"
 	@echo "  homebrew      - Install Homebrew"
 	@echo "  brewfile      - Install packages from Brewfile"
+	@echo "  npm           - Install AI CLI tools (claude-code, codex)"
 	@echo "  oh-my-zsh     - Install Oh My ZSH with plugins"
 	@echo "  configure     - Configure macOS preferences (Dock, Trackpad, Login Items)"
 	@echo "  stow          - Deploy all dotfiles"
 	@echo "  stow-git      - Deploy Git config only"
 	@echo "  stow-ssh      - Deploy SSH config only"
 	@echo "  stow-zsh      - Deploy ZSH config only"
-	@echo "  install       - Run full installation"
+	@echo "  install       - Run full installation (brew + npm)"
 	@echo "  deploy        - Deploy all dotfiles"
 	@echo "  setup         - Complete setup (install + deploy + configure)"
 
 # Installation
-.PHONY: homebrew brewfile oh-my-zsh configure
+.PHONY: homebrew brewfile npm oh-my-zsh configure
 homebrew:
 	@bash $(SCRIPTS_DIR)/01-homebrew.sh
 
 brewfile: homebrew
 	@bash $(SCRIPTS_DIR)/02-brewfile.sh
+
+npm: brewfile
+	@bash $(SCRIPTS_DIR)/05-npm-packages.sh
 
 oh-my-zsh:
 	@bash $(SCRIPTS_DIR)/install-oh-my-zsh.sh
@@ -40,7 +44,7 @@ configure:
 
 # Deployment
 .PHONY: stow stow-git stow-ssh stow-zsh
-stow:
+stow: oh-my-zsh
 	@bash $(SCRIPTS_DIR)/03-stow.sh
 
 stow-git:
@@ -58,8 +62,8 @@ stow-zsh:
 
 # Full setup
 .PHONY: install deploy setup
-install: homebrew brewfile
+install: homebrew brewfile npm
 
-deploy: stow oh-my-zsh
+deploy: stow
 
 setup: install deploy configure

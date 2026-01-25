@@ -108,3 +108,7 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# AI CLI Tools
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
