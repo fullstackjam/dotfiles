@@ -14,7 +14,7 @@
     default = simple
 
 [pull]
-    rebase = false
+    rebase = true
 
 [alias]
     st = status
