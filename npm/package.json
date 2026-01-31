@@ -4,9 +4,7 @@
   "description": "Global npm packages for CLI tools",
   "private": true,
   "dependencies": {
-    "@anthropic-ai/claude-code": "latest",
     "@openai/codex": "latest",
-    "@google/gemini-cli": "latest",
     "wrangler": "latest"
   }
 }

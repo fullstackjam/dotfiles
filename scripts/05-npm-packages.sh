@@ -78,4 +78,12 @@ else
     print_warning "codex command not found in PATH"
 fi
 
+# Install Claude Code using official install script
+print_info "Installing Claude Code via official install script..."
+if curl -fsSL https://claude.ai/install.sh | bash; then
+    print_success "Claude Code installed successfully!"
+else
+    print_warning "Failed to install Claude Code"
+fi
+
 print_success "npm packages installation completed!"
