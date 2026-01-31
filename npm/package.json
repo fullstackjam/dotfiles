@@ -6,6 +6,7 @@
   "dependencies": {
     "@anthropic-ai/claude-code": "latest",
     "@openai/codex": "latest",
+    "@google/gemini-cli": "latest",
     "wrangler": "latest"
   }
 }
