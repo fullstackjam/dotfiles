@@ -11,18 +11,22 @@ all: help
 .PHONY: help
 help:
 	@echo "Available targets:"
+	@echo "  setup         - Complete setup (install + deploy + configure)"
+	@echo "  install       - Run full installation (brew + npm)"
+	@echo "  deploy        - Deploy all dotfiles"
+	@echo "  uninstall     - Remove deployed dotfiles (restores from backup if available)"
+	@echo "  backup        - Backup current dotfiles to ~/.dotfiles-backup"
+	@echo "  dry-run       - Show what stow would do without making changes"
+	@echo ""
 	@echo "  homebrew      - Install Homebrew"
 	@echo "  brewfile      - Install packages from Brewfile"
-	@echo "  npm           - Install AI CLI tools (claude-code, codex)"
+	@echo "  npm           - Install npm packages"
 	@echo "  oh-my-zsh     - Install Oh My ZSH with plugins"
-	@echo "  configure     - Configure macOS preferences (Dock, Trackpad, Login Items)"
+	@echo "  configure     - Configure macOS preferences"
 	@echo "  stow          - Deploy all dotfiles"
 	@echo "  stow-git      - Deploy Git config only"
 	@echo "  stow-ssh      - Deploy SSH config only"
 	@echo "  stow-zsh      - Deploy ZSH config only"
-	@echo "  install       - Run full installation (brew + npm)"
-	@echo "  deploy        - Deploy all dotfiles"
-	@echo "  setup         - Complete setup (install + deploy + configure)"
 
 # Installation
 .PHONY: homebrew brewfile npm oh-my-zsh configure
@@ -67,3 +71,22 @@ install: homebrew brewfile npm
 deploy: stow
 
 setup: install deploy configure
+
+# Maintenance
+.PHONY: uninstall backup dry-run
+uninstall:
+	@echo "Removing stow symlinks..."
+	@cd $(CURDIR) && stow -D -t "$(HOME)" git ssh zsh 2>/dev/null || true
+	@echo "Done. Check ~/.dotfiles-backup for previous configs."
+
+backup:
+	@BACKUP_DIR="$(HOME)/.dotfiles-backup/$$(date +%Y%m%d-%H%M%S)" && \
+	mkdir -p "$$BACKUP_DIR" && \
+	for f in .gitconfig .ssh/config .zshrc; do \
+		[ -f "$(HOME)/$$f" ] && cp "$(HOME)/$$f" "$$BACKUP_DIR/$$f" 2>/dev/null || true; \
+	done && \
+	echo "Backed up to $$BACKUP_DIR"
+
+dry-run:
+	@echo "=== Dry run: showing what stow would do ==="
+	@cd $(CURDIR) && stow -n -v --target="$(HOME)" git ssh zsh 2>&1 || true

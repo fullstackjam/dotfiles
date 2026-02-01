@@ -127,18 +127,14 @@ setup_homebrew_env() {
         return 1
     fi
     
-    # Check if Homebrew shellenv is already in .zprofile
     local zprofile_path="$HOME/.zprofile"
-    if [ ! -f "$zprofile_path" ]; then
-        touch "$zprofile_path"
-        print_info "Created $zprofile_path"
-        echo "$brew_shellenv" >> "$zprofile_path"
-        print_info "Added Homebrew to $zprofile_path"
-    elif ! grep -q "brew shellenv" "$zprofile_path" 2>/dev/null; then
-        echo "$brew_shellenv" >> "$zprofile_path"
-        print_info "Added Homebrew to $zprofile_path"
-    else
+    local marker="# Added by dotfiles setup"
+    
+    if grep -q "$marker" "$zprofile_path" 2>/dev/null; then
         print_info "Homebrew already configured in $zprofile_path"
+    else
+        echo -e "\n$marker\n$brew_shellenv" >> "$zprofile_path"
+        print_info "Added Homebrew to $zprofile_path"
     fi
     
     # Apply Homebrew environment to current session

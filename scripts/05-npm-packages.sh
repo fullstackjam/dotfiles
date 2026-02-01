@@ -78,12 +78,19 @@ else
     print_warning "codex command not found in PATH"
 fi
 
-# Install Claude Code using official install script
+# Install Claude Code using official install script (download first, then execute)
 print_info "Installing Claude Code via official install script..."
-if curl -fsSL https://claude.ai/install.sh | bash; then
-    print_success "Claude Code installed successfully!"
+CLAUDE_INSTALL_SCRIPT=$(mktemp)
+if curl -fsSL https://claude.ai/install.sh -o "$CLAUDE_INSTALL_SCRIPT"; then
+    print_info "Script downloaded to $CLAUDE_INSTALL_SCRIPT ($(wc -c < "$CLAUDE_INSTALL_SCRIPT") bytes)"
+    if bash "$CLAUDE_INSTALL_SCRIPT"; then
+        print_success "Claude Code installed successfully!"
+    else
+        print_warning "Failed to install Claude Code"
+    fi
+    rm -f "$CLAUDE_INSTALL_SCRIPT"
 else
-    print_warning "Failed to install Claude Code"
+    print_warning "Failed to download Claude Code install script"
 fi
 
 print_success "npm packages installation completed!"

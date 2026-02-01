@@ -36,10 +36,20 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
     }
 else
     print_info "Installing Oh My ZSH..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || {
-        print_error "Failed to install Oh My ZSH"
+    # Download script first, then execute (safer than curl|sh)
+    OMZ_INSTALL_SCRIPT=$(mktemp)
+    if curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o "$OMZ_INSTALL_SCRIPT"; then
+        print_info "Script downloaded to $OMZ_INSTALL_SCRIPT ($(wc -c < "$OMZ_INSTALL_SCRIPT") bytes)"
+        sh "$OMZ_INSTALL_SCRIPT" --unattended || {
+            rm -f "$OMZ_INSTALL_SCRIPT"
+            print_error "Failed to install Oh My ZSH"
+            exit 1
+        }
+        rm -f "$OMZ_INSTALL_SCRIPT"
+    else
+        print_error "Failed to download Oh My ZSH install script"
         exit 1
-    }
+    fi
 fi
 
 # Install plugins

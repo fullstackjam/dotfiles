@@ -4,7 +4,6 @@
   "description": "Global npm packages for CLI tools",
   "private": true,
   "dependencies": {
-    "@openai/codex": "latest",
     "wrangler": "latest"
   }
 }

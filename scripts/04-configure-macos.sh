@@ -6,6 +6,24 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/common.sh"
 
+# =============================================================================
+# CONFIGURATION - Edit these arrays to customize your setup
+# =============================================================================
+
+DOCK_APPS=(
+    "/Applications/Google Chrome.app"
+    "/Applications/Visual Studio Code.app"
+    "/Applications/Warp.app"
+)
+
+LOGIN_APPS=(
+    "Scroll Reverser:/Applications/Scroll Reverser.app:false"
+    "Maccy:/Applications/Maccy.app:false"
+    "BetterDisplay:/Applications/BetterDisplay.app:false"
+)
+
+# =============================================================================
+
 print_header "Configuring macOS preferences"
 
 if ! is_macos; then
@@ -21,15 +39,8 @@ defaults write com.apple.dock autohide -bool false
 defaults write com.apple.dock "show-recents" -bool false
 defaults write com.apple.dock tilesize -int 38
 
-# Set Dock apps
 print_info "Configuring Dock apps..."
 defaults delete com.apple.dock persistent-apps 2>/dev/null || true
-
-DOCK_APPS=(
-    "/Applications/Google Chrome.app"
-    "/Applications/Visual Studio Code.app"
-    "/Applications/Warp.app"
-)
 
 for app in "${DOCK_APPS[@]}"; do
     if [ -d "$app" ]; then
@@ -120,25 +131,24 @@ done
 # Login items
 # -----------------------------
 print_info "Configuring login items..."
-LOGIN_ITEMS=(
-    "Scroll Reverser:/Applications/Scroll Reverser.app:false"
-    "Maccy:/Applications/Maccy.app:false"
-    "BetterDisplay:/Applications/BetterDisplay.app:false"
-)
 
-for item in "${LOGIN_ITEMS[@]}"; do
+for item in "${LOGIN_APPS[@]}"; do
     IFS=":" read -r name path hidden <<<"$item"
     if [ ! -d "$path" ]; then
         print_warning "Login item '$name' expected at '$path' but was not found"
     fi
 done
 
-osascript <<'OSA'
+osascript_items=""
+for item in "${LOGIN_APPS[@]}"; do
+    IFS=":" read -r name path hidden <<<"$item"
+    [ -n "$osascript_items" ] && osascript_items+=", "
+    osascript_items+="{name:\"$name\", path:\"$path\", hidden:$hidden}"
+done
+
+osascript <<OSA
 tell application "System Events"
-    set desiredItems to {¬
-        {name:"Scroll Reverser", path:"/Applications/Scroll Reverser.app", hidden:false}, ¬
-        {name:"Maccy", path:"/Applications/Maccy.app", hidden:false}, ¬
-        {name:"BetterDisplay", path:"/Applications/BetterDisplay.app", hidden:false}}
+    set desiredItems to {$osascript_items}
     repeat with itemProps in desiredItems
         set itemName to name of itemProps
         if exists login item itemName then delete login item itemName
