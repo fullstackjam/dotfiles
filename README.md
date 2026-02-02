@@ -2,54 +2,48 @@
 
 Pure configuration files managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-Software installation is handled separately via [OpenBoot](https://openboot.dev).
+Software installation is handled by [OpenBoot](https://openboot.dev).
 
 ## Quick Start
 
 ```bash
-# 1. Install software (via OpenBoot)
-curl -fsSL openboot.dev/fullstackjam/dotfiles/install | bash
-
-# 2. Deploy dotfiles
-git clone https://github.com/fullstackjam/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-make deploy
+curl -fsSL openboot.dev/fullstackjam | bash
 ```
 
-## Commands
+This will:
+1. Install Homebrew and packages
+2. Clone this repo to `~/.dotfiles`
+3. Deploy configs via stow
+4. Install Oh-My-Zsh and plugins
+
+## Manual Deploy
 
 ```bash
-make deploy    # Deploy all dotfiles via stow
-make uninstall # Remove deployed dotfiles
-make backup    # Backup current dotfiles
-make dry-run   # Preview changes without applying
+git clone https://github.com/fullstackjam/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+stow -v --target="$HOME" git ssh zsh npm
 ```
 
-## What's Included
+## Structure
 
-| Directory | Description |
-|-----------|-------------|
-| `git/`    | Git configuration with aliases |
-| `ssh/`    | SSH client optimization |
-| `zsh/`    | Zsh configuration |
-| `npm/`    | NPM configuration |
+```
+dotfiles/
+├── git/.gitconfig      # Git configuration
+├── ssh/.ssh/config     # SSH client config
+├── zsh/.zshrc          # Zsh configuration
+└── npm/.npmrc          # NPM configuration
+```
 
 ## How Stow Works
 
 Stow creates symlinks from your home directory to the dotfiles:
 
 ```
-~/.gitconfig -> ~/.dotfiles/git/.gitconfig
-~/.ssh/config -> ~/.dotfiles/ssh/.ssh/config
-~/.zshrc -> ~/.dotfiles/zsh/.zshrc
+~/.gitconfig    → ~/.dotfiles/git/.gitconfig
+~/.ssh/config   → ~/.dotfiles/ssh/.ssh/config
+~/.zshrc        → ~/.dotfiles/zsh/.zshrc
+~/.npmrc        → ~/.dotfiles/npm/.npmrc
 ```
-
-## Customization
-
-1. **Git**: Edit `git/.gitconfig` (update name/email)
-2. **SSH**: Edit `ssh/.ssh/config`
-3. **Zsh**: Edit `zsh/.zshrc`
-4. **Add new configs**: Create new directory, add files, update `scripts/03-stow.sh`
 
 ## License
 
