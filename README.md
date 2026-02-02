@@ -1,55 +1,56 @@
 # Dotfiles
 
-A clean, modular dotfiles management system using GNU Stow and Make.
+Pure configuration files managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
-## 🚀 Quick Start
+Software installation is handled separately via [OpenBoot](https://openboot.dev).
 
-```bash
-git clone https://github.com/fullstackjam/dotfiles.git
-cd dotfiles
-make setup
-```
-
-## 📋 Commands
+## Quick Start
 
 ```bash
-make setup       # Complete installation + deployment
-make install     # Install software only
-make deploy      # Deploy dotfiles only
+# 1. Install software (via OpenBoot)
+curl -fsSL openboot.dev/fullstackjam/dotfiles/install | bash
 
-# Modular options
-make homebrew    # Install Homebrew
-make brewfile    # Install packages
-make stow-git    # Deploy Git config only
-make stow-ssh    # Deploy SSH config only
-
-make help        # Show all commands
+# 2. Deploy dotfiles
+git clone https://github.com/fullstackjam/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+make deploy
 ```
 
-## 📦 What's Included
+## Commands
 
-- **Homebrew** package manager with 50+ packages
-- **Git** configuration with useful aliases and colors
-- **SSH** client optimization for GitHub and general use
-
-## 🏗️ Architecture
-
-```
-dotfiles/
-├── Makefile              # Main interface
-├── scripts/              # Modular installation scripts
-├── git/                  # Git configuration
-├── ssh/                  # SSH configuration
-└── Brewfile              # Homebrew packages
+```bash
+make deploy    # Deploy all dotfiles via stow
+make uninstall # Remove deployed dotfiles
+make backup    # Backup current dotfiles
+make dry-run   # Preview changes without applying
 ```
 
-## 🔧 Customization
+## What's Included
 
-**Configure Git**: Edit `git/.gitconfig` and uncomment/update name/email
-**Add packages**: Edit `Brewfile`
-**Modify configs**: Edit files in respective directories
-**Add new configs**: Create new directory and update `scripts/03-stow.sh`
+| Directory | Description |
+|-----------|-------------|
+| `git/`    | Git configuration with aliases |
+| `ssh/`    | SSH client optimization |
+| `zsh/`    | Zsh configuration |
+| `npm/`    | NPM configuration |
 
-## 📄 License
+## How Stow Works
+
+Stow creates symlinks from your home directory to the dotfiles:
+
+```
+~/.gitconfig -> ~/.dotfiles/git/.gitconfig
+~/.ssh/config -> ~/.dotfiles/ssh/.ssh/config
+~/.zshrc -> ~/.dotfiles/zsh/.zshrc
+```
+
+## Customization
+
+1. **Git**: Edit `git/.gitconfig` (update name/email)
+2. **SSH**: Edit `ssh/.ssh/config`
+3. **Zsh**: Edit `zsh/.zshrc`
+4. **Add new configs**: Create new directory, add files, update `scripts/03-stow.sh`
+
+## License
 
 MIT
