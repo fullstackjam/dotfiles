@@ -21,7 +21,7 @@ This will:
 ```bash
 git clone https://github.com/fullstackjam/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-stow -v --target="$HOME" git ssh zsh npm
+stow -v --target="$HOME" git ssh zsh
 ```
 
 ## Structure
@@ -30,8 +30,7 @@ stow -v --target="$HOME" git ssh zsh npm
 dotfiles/
 ├── git/.gitconfig      # Git configuration
 ├── ssh/.ssh/config     # SSH client config
-├── zsh/.zshrc          # Zsh configuration
-└── npm/.npmrc          # NPM configuration
+└── zsh/.zshrc          # Zsh configuration
 ```
 
 ## How Stow Works
@@ -42,7 +41,6 @@ Stow creates symlinks from your home directory to the dotfiles:
 ~/.gitconfig    → ~/.dotfiles/git/.gitconfig
 ~/.ssh/config   → ~/.dotfiles/ssh/.ssh/config
 ~/.zshrc        → ~/.dotfiles/zsh/.zshrc
-~/.npmrc        → ~/.dotfiles/npm/.npmrc
 ```
 
 ## License
