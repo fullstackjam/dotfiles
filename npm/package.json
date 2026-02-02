@@ -1,9 +1,0 @@
-{
-  "name": "dotfiles-global-packages",
-  "version": "1.0.0",
-  "description": "Global npm packages for CLI tools",
-  "private": true,
-  "dependencies": {
-    "wrangler": "latest"
-  }
-}
