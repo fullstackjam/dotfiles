@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash $HOME/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "auto",
+  "autoCompactEnabled": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
+}
