@@ -21,7 +21,7 @@ This will:
 ```bash
 git clone https://github.com/fullstackjam/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-stow -v --target="$HOME" git ssh zsh claude
+stow -v --target="$HOME" git ssh zsh claude ghostty
 ```
 
 ## Structure
@@ -31,7 +31,8 @@ dotfiles/
 ├── git/.gitconfig          # Git configuration
 ├── ssh/.ssh/config         # SSH client config
 ├── zsh/.zshrc              # Zsh configuration
-└── claude/.claude/CLAUDE.md  # Claude Code global instructions
+├── claude/.claude/CLAUDE.md  # Claude Code global instructions
+└── ghostty/.config/ghostty/config  # Ghostty terminal configuration
 ```
 
 ## How Stow Works
@@ -43,6 +44,7 @@ Stow creates symlinks from your home directory to the dotfiles:
 ~/.ssh/config       → ~/.dotfiles/ssh/.ssh/config
 ~/.zshrc            → ~/.dotfiles/zsh/.zshrc
 ~/.claude/CLAUDE.md → ~/.dotfiles/claude/.claude/CLAUDE.md
+~/.config/ghostty/config → ~/.dotfiles/ghostty/.config/ghostty/config
 ```
 
 Note: because `~/.claude/` contains runtime data (sessions, cache, etc.), stow does not fold the directory — it only symlinks `CLAUDE.md` individually, leaving the rest of `~/.claude/` untouched.
