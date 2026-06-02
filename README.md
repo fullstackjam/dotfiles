@@ -21,13 +21,14 @@ This will:
 ```bash
 git clone https://github.com/fullstackjam/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-stow -v --target="$HOME" git ssh zsh claude ghostty
+make install
 ```
 
 ## Structure
 
 ```
 dotfiles/
+├── Makefile                             # Install / uninstall entrypoint
 ├── git/.gitconfig                       # Git configuration
 ├── ssh/.ssh/config                      # SSH client config
 ├── zsh/.zshrc                           # Zsh configuration
@@ -37,9 +38,10 @@ dotfiles/
 └── ghostty/.config/ghostty/config       # Ghostty terminal configuration
 ```
 
-## How Stow Works
+## How It Works
 
-Stow creates symlinks from your home directory to the dotfiles:
+`make install` pre-creates the necessary directories, then runs stow with
+`--no-folding` so each config file is symlinked individually:
 
 ```
 ~/.gitconfig                    → ~/.dotfiles/git/.gitconfig
@@ -51,7 +53,8 @@ Stow creates symlinks from your home directory to the dotfiles:
 ~/.config/ghostty/config        → ~/.dotfiles/ghostty/.config/ghostty/config
 ```
 
-Note: `~/.claude/` must exist as a real directory before running stow — otherwise stow folds the entire directory into a single symlink. Runtime data (sessions, cache, history, etc.) lives directly in `~/.claude/` and is never tracked.
+Runtime data (`~/.claude/sessions`, `~/.ssh/known_hosts`, etc.) lives in the
+real directories and is never tracked.
 
 ## License
 
