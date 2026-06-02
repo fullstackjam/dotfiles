@@ -28,11 +28,13 @@ stow -v --target="$HOME" git ssh zsh claude ghostty
 
 ```
 dotfiles/
-├── git/.gitconfig          # Git configuration
-├── ssh/.ssh/config         # SSH client config
-├── zsh/.zshrc              # Zsh configuration
-├── claude/.claude/CLAUDE.md  # Claude Code global instructions
-└── ghostty/.config/ghostty/config  # Ghostty terminal configuration
+├── git/.gitconfig                       # Git configuration
+├── ssh/.ssh/config                      # SSH client config
+├── zsh/.zshrc                           # Zsh configuration
+├── claude/.claude/CLAUDE.md             # Claude Code global instructions
+├── claude/.claude/settings.json         # Claude Code settings
+├── claude/.claude/statusline-command.sh # Claude Code statusline script
+└── ghostty/.config/ghostty/config       # Ghostty terminal configuration
 ```
 
 ## How Stow Works
@@ -40,14 +42,16 @@ dotfiles/
 Stow creates symlinks from your home directory to the dotfiles:
 
 ```
-~/.gitconfig        → ~/.dotfiles/git/.gitconfig
-~/.ssh/config       → ~/.dotfiles/ssh/.ssh/config
-~/.zshrc            → ~/.dotfiles/zsh/.zshrc
-~/.claude/CLAUDE.md → ~/.dotfiles/claude/.claude/CLAUDE.md
-~/.config/ghostty/config → ~/.dotfiles/ghostty/.config/ghostty/config
+~/.gitconfig                    → ~/.dotfiles/git/.gitconfig
+~/.ssh/config                   → ~/.dotfiles/ssh/.ssh/config
+~/.zshrc                        → ~/.dotfiles/zsh/.zshrc
+~/.claude/CLAUDE.md             → ~/.dotfiles/claude/.claude/CLAUDE.md
+~/.claude/settings.json         → ~/.dotfiles/claude/.claude/settings.json
+~/.claude/statusline-command.sh → ~/.dotfiles/claude/.claude/statusline-command.sh
+~/.config/ghostty/config        → ~/.dotfiles/ghostty/.config/ghostty/config
 ```
 
-Note: because `~/.claude/` contains runtime data (sessions, cache, etc.), stow does not fold the directory — it only symlinks `CLAUDE.md` individually, leaving the rest of `~/.claude/` untouched.
+Note: `~/.claude/` must exist as a real directory before running stow — otherwise stow folds the entire directory into a single symlink. Runtime data (sessions, cache, history, etc.) lives directly in `~/.claude/` and is never tracked.
 
 ## License
 
