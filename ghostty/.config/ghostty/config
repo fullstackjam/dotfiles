@@ -56,9 +56,3 @@ unfocused-split-opacity = 0.7
 
 # Claude Code / 部分 CLI 需要 shift+enter 换行不提交
 keybind = shift+enter=text:\n
-
-# ── 全局下拉终端(Quick Terminal)──────────────
-# cmd+` 全局唤出/隐藏,即使 Ghostty 没在前台也生效
-keybind = global:cmd+grave_accent=toggle_quick_terminal
-# 从屏幕顶部下拉(top/bottom/left/right/center)
-quick-terminal-position = top
