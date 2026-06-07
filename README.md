@@ -35,7 +35,10 @@ dotfiles/
 ├── claude/.claude/CLAUDE.md             # Claude Code global instructions
 ├── claude/.claude/settings.json         # Claude Code settings
 ├── claude/.claude/statusline-command.sh # Claude Code statusline script
-└── ghostty/.config/ghostty/config       # Ghostty terminal configuration
+├── ghostty/.config/ghostty/config       # Ghostty terminal configuration
+├── opencode/.config/opencode/opencode.json
+├── opencode/.config/opencode/oh-my-openagent.json
+└── opencode/.config/opencode/tui.json
 ```
 
 ## How It Works
@@ -51,10 +54,14 @@ dotfiles/
 ~/.claude/settings.json         → ~/.dotfiles/claude/.claude/settings.json
 ~/.claude/statusline-command.sh → ~/.dotfiles/claude/.claude/statusline-command.sh
 ~/.config/ghostty/config        → ~/.dotfiles/ghostty/.config/ghostty/config
+~/.config/opencode/opencode.json          → ~/.dotfiles/opencode/.config/opencode/opencode.json
+~/.config/opencode/oh-my-openagent.json   → ~/.dotfiles/opencode/.config/opencode/oh-my-openagent.json
+~/.config/opencode/tui.json               → ~/.dotfiles/opencode/.config/opencode/tui.json
 ```
 
-Runtime data (`~/.claude/sessions`, `~/.ssh/known_hosts`, etc.) lives in the
-real directories and is never tracked.
+Runtime data (`~/.claude/sessions`, `~/.ssh/known_hosts`, `~/.opencode`,
+`~/.config/opencode/node_modules`, etc.) lives in the real directories and is
+never tracked.
 
 ## License
 
