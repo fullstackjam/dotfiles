@@ -10,7 +10,8 @@
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
     "superpowers@superpowers-marketplace": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "cloudflare@cloudflare": true
   },
   "extraKnownMarketplaces": {
     "superpowers-marketplace": {
@@ -23,6 +24,12 @@
       "source": {
         "source": "github",
         "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "cloudflare": {
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills"
       }
     }
   },
