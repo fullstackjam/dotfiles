@@ -31,9 +31,20 @@
         "source": "github",
         "repo": "cloudflare/skills"
       }
+    },
+    "kami": {
+      "source": {
+        "source": "github",
+        "repo": "tw93/kami"
+      }
+    },
+    "skills": {
+      "source": {
+        "source": "github",
+        "repo": "fullstackjam/skills"
+      }
     }
   },
-  "effortLevel": "high",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
@@ -41,5 +52,6 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "effortLevel": "xhigh"
 }
