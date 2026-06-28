@@ -1,65 +1,34 @@
 # CLAUDE.md
 
-Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
+## 事实 vs 推断
+- 能查证的（读代码 / 跑命令 / 查文档），先去查，再下结论——别停在「我猜」上。
+- 实在查不了的，才标「推测 / 没验证」，并说清不确定在哪。
+- 不要用笃定语气糊过去。把没核实当核实过来讲，是硬错误。
 
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
+## 动手前先摊牌
+- 需求有歧义、或有多种合理解读时，先把解读列出来，不要自己挑一个闷头做。
+- 动手前把关键假设写出来；需求 / 目标层面拿不准，先问清楚，别拿猜测当需求往下做。
+- 觉得有更简单的做法，直接说出来并讲清理由，别默默按我说的做。
 
-## 1. Think Before Coding
+## 低风险自己拿主意
+- 可逆、本地、不对外影响的事（读代码、跑只读 / 测试命令、改工作区代码、查文档），自己查证、自己决定、直接做，别为每件小事来确认。
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+## 只动该动的
+- 每一行改动都要能对应到我的需求；对应不上的，不写。（这条同时覆盖「不加没要求的功能 / 抽象 / 配置 / 防御性代码」。）
+- 不顺手「优化」无关的代码、注释、格式；diff 里不该出现和需求无关的行。
+- 跟着现有代码的风格写，哪怕我自己会用别的写法。
+- 看到无关的死代码，只指出来，不删（除非我让你删）。
+- 只清理你这次改动制造出来的孤儿（没用到的 import / 变量 / 函数）。
 
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+## 验收驱动
+- 多步任务，先用一句话列出计划，每步带一个可检查的验收点。
+- 修 bug：先写一个能复现它的测试，再让它通过。
+- 改完别口头说「应该好了」——把验证命令跑了，贴出输出，再下结论。
 
-## 2. Simplicity First
+## 中文标点
+- 中文句子用全角：，。、；：？！「」（）；不要用半角 , . ; : ? ! ( )。
+- 中文与英文 / 数字之间加空格（如「版本 2.1.195」「用 `git` 提交」）。
+- 数字、英文、代码、路径本身保持半角（如 `2.1.195`、`npm test`）。
 
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-## 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
-
----
-
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+## 维护本文件
+- 往这里加新条目前，先确认它能从 diff / 输出判定；判定不了的（态度、价值观），不加。
