@@ -6,9 +6,22 @@
     "type": "command",
     "command": "bash $HOME/.claude/statusline-command.sh"
   },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/python3 \"$HOME/.claude/hooks/full-width-punct.py\"",
+            "timeout": 10,
+            "statusMessage": "检查中文标点"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
-    "superpowers@superpowers-marketplace": true,
     "codex@openai-codex": true,
     "cloudflare@cloudflare": true,
     "playwright@claude-plugins-official": true,
@@ -49,6 +62,7 @@
     }
   },
   "effortLevel": "xhigh",
+  "advisorModel": "opus",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
@@ -56,5 +70,6 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "model": "sonnet"
 }
