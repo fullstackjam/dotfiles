@@ -2,51 +2,10 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
+  "model": "claude-opus-4-8[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash $HOME/.claude/statusline-command.sh"
-  },
-  "enabledPlugins": {
-    "skill-creator@claude-plugins-official": true,
-    "codex@openai-codex": true,
-    "cloudflare@cloudflare": true,
-    "playwright@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "kami@kami": true,
-    "fullstackjam@skills": true
-  },
-  "extraKnownMarketplaces": {
-    "superpowers-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "obra/superpowers-marketplace"
-      }
-    },
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
-      }
-    },
-    "cloudflare": {
-      "source": {
-        "source": "github",
-        "repo": "cloudflare/skills"
-      }
-    },
-    "kami": {
-      "source": {
-        "source": "github",
-        "repo": "tw93/kami"
-      }
-    },
-    "skills": {
-      "source": {
-        "source": "github",
-        "repo": "fullstackjam/skills"
-      }
-    }
   },
   "effortLevel": "xhigh",
   "advisorModel": "opus",
