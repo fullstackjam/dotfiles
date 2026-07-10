@@ -2,23 +2,10 @@
   "permissions": {
     "defaultMode": "auto"
   },
+  "model": "claude-fable-5[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash $HOME/.claude/statusline-command.sh"
-  },
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/usr/bin/python3 \"$HOME/.claude/hooks/full-width-punct.py\"",
-            "timeout": 10,
-            "statusMessage": "检查中文标点"
-          }
-        ]
-      }
-    ]
   },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
@@ -70,6 +57,5 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "model": "sonnet"
+  "skipAutoPermissionPrompt": true
 }
