@@ -24,6 +24,12 @@
     "dock": "left"
   },
   "agent": {
+    "enable_feedback": false,
+    "tool_permissions": {
+      "default": "allow",
+      "tools": {}
+    },
+    "dock": "right",
     "default_model": {
       "provider": "deepseek",
       "model": "deepseek-v4-pro",

@@ -19,6 +19,9 @@ used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
 # Model
 model=$(echo "$input" | jq -r '.model.display_name // .model.id // empty')
 
+# Reasoning effort (absent when the model has no effort parameter)
+effort=$(echo "$input" | jq -r '.effort.level // empty')
+
 # ANSI colors (will be dimmed by Claude Code)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -45,6 +48,11 @@ fi
 # Model
 if [ -n "$model" ]; then
   printf " ${MAGENTA}[%s]${RESET}" "$model"
+fi
+
+# Reasoning effort
+if [ -n "$effort" ]; then
+  printf " ${MAGENTA}%s${RESET}" "$effort"
 fi
 
 # Context window usage
