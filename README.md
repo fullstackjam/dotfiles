@@ -24,6 +24,16 @@ cd ~/.dotfiles
 make install
 ```
 
+## Global Agent Skills
+
+`op-vault` is vendored in this repository at
+`agents/.agents/skills/op-vault/`. Codex reads the deployed universal skill
+directly, and Claude Code follows the relative symlink at
+`claude/.claude/skills/op-vault`.
+
+The vendored copy is deliberately updated only through a reviewed repository
+change; it is not managed by an external installer or updated automatically.
+
 ## Structure
 
 ```
@@ -32,9 +42,12 @@ dotfiles/
 ├── git/.gitconfig                       # Git configuration
 ├── ssh/.ssh/config                      # SSH client config
 ├── zsh/.zshrc                           # Zsh configuration
-├── claude/.claude/CLAUDE.md             # Claude Code global instructions
+├── agents/.agents/skills/op-vault/      # Shared global skill source
+├── claude/.claude/CLAUDE.md             # → codex/.codex/AGENTS.md
+├── claude/.claude/skills/op-vault       # → agents/.agents/skills/op-vault
 ├── claude/.claude/settings.json         # Claude Code settings
 ├── claude/.claude/statusline-command.sh # Claude Code statusline script
+├── codex/.codex/AGENTS.md               # Global agent instructions
 └── ghostty/.config/ghostty/config       # Ghostty terminal configuration
 ```
 
@@ -48,10 +61,17 @@ dotfiles/
 ~/.ssh/config                   → ~/.dotfiles/ssh/.ssh/config
 ~/.zshrc                        → ~/.dotfiles/zsh/.zshrc
 ~/.claude/CLAUDE.md             → ~/.dotfiles/claude/.claude/CLAUDE.md
+~/.claude/skills/op-vault       → ~/.dotfiles/claude/.claude/skills/op-vault
 ~/.claude/settings.json         → ~/.dotfiles/claude/.claude/settings.json
 ~/.claude/statusline-command.sh → ~/.dotfiles/claude/.claude/statusline-command.sh
+~/.agents/skills/op-vault/      → ~/.dotfiles/agents/.agents/skills/op-vault/
+~/.codex/AGENTS.md              → ~/.dotfiles/codex/.codex/AGENTS.md
 ~/.config/ghostty/config        → ~/.dotfiles/ghostty/.config/ghostty/config
 ```
+
+`codex/.codex/AGENTS.md` is the single source for global instructions, while
+`agents/.agents/skills/op-vault/` is the single source for the shared skill.
+Their Claude counterparts are relative symlinks to those files.
 
 Runtime data (`~/.claude/sessions`, `~/.ssh/known_hosts`, etc.) lives in the
 real directories and is never tracked.
