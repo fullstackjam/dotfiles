@@ -53,8 +53,10 @@ dotfiles/
 
 ## How It Works
 
-`make install` pre-creates the necessary directories, then runs stow with
-`--no-folding` so each config file is symlinked individually:
+`make install` pre-creates the necessary directories, then deploys regular
+configuration packages with `--no-folding` so each config file is symlinked
+individually. The `agents` package deliberately allows folding so each complete
+skill directory is a symlink, as required by compatible agent clients:
 
 ```
 ~/.gitconfig                    → ~/.dotfiles/git/.gitconfig
