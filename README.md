@@ -46,7 +46,6 @@ dotfiles/
 ├── claude/.claude/CLAUDE.md             # → codex/.codex/AGENTS.md
 ├── claude/.claude/skills/op-vault       # → agents/.agents/skills/op-vault
 ├── claude/.claude/settings.json         # Claude Code settings
-├── claude/.claude/statusline-command.sh # Claude Code statusline script
 ├── codex/.codex/AGENTS.md               # Global agent instructions
 └── ghostty/.config/ghostty/config       # Ghostty terminal configuration
 ```
@@ -65,7 +64,6 @@ skill directory is a symlink, as required by compatible agent clients:
 ~/.claude/CLAUDE.md             → ~/.dotfiles/claude/.claude/CLAUDE.md
 ~/.claude/skills/op-vault       → ~/.dotfiles/claude/.claude/skills/op-vault
 ~/.claude/settings.json         → ~/.dotfiles/claude/.claude/settings.json
-~/.claude/statusline-command.sh → ~/.dotfiles/claude/.claude/statusline-command.sh
 ~/.agents/skills/op-vault/      → ~/.dotfiles/agents/.agents/skills/op-vault/
 ~/.codex/AGENTS.md              → ~/.dotfiles/codex/.codex/AGENTS.md
 ~/.config/ghostty/config        → ~/.dotfiles/ghostty/.config/ghostty/config

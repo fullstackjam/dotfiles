@@ -23,3 +23,6 @@ Thumbs.db
 *.bak
 *.backup
 *.orig
+
+# Temporary review clones
+.agent-reach-review/

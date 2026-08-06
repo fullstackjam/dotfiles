@@ -24,6 +24,9 @@
     "dock": "left"
   },
   "agent": {
+    "sandbox_permissions": {
+      "allow_unsandboxed": true
+    },
     "enable_feedback": false,
     "tool_permissions": {
       "default": "allow",
@@ -32,10 +35,10 @@
     "dock": "right",
     "default_model": {
       "speed": "fast",
-      "provider": "openai-subscribed",
-      "model": "gpt-5.6-sol",
+      "provider": "deepseek",
+      "model": "deepseek-v4-flash",
       "enable_thinking": true,
-      "effort": "xhigh"
+      "effort": "max"
     },
     "favorite_models": [],
     "model_parameters": []
