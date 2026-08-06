@@ -25,20 +25,21 @@
   },
   "agent": {
     "sandbox_permissions": {
+      "allow_all_hosts": true,
+      "allow_fs_write_all": true,
       "allow_unsandboxed": true
     },
     "enable_feedback": false,
     "tool_permissions": {
-      "default": "allow",
-      "tools": {}
+      "default": "allow"
     },
     "dock": "right",
     "default_model": {
       "speed": "fast",
-      "provider": "deepseek",
-      "model": "deepseek-v4-flash",
+      "provider": "openai-subscribed",
+      "model": "gpt-5.6-sol",
       "enable_thinking": true,
-      "effort": "max"
+      "effort": "high"
     },
     "favorite_models": [],
     "model_parameters": []
