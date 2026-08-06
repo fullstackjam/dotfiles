@@ -6,7 +6,7 @@ FOLDED_PACKAGES := agents
 .PHONY: install uninstall
 
 install:
-	mkdir -p $(HOME)/.ssh $(HOME)/.claude $(HOME)/.codex $(HOME)/.agents/skills $(HOME)/.config/ghostty $(HOME)/.config/zed
+	mkdir -p $(HOME)/.ssh $(HOME)/.claude $(HOME)/.codex $(HOME)/.config/ghostty $(HOME)/.config/zed
 	$(STOW) $(FOLDED_PACKAGES)
 	$(STOW) --no-folding $(PACKAGES)
 

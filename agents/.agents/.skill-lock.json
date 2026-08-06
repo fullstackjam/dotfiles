@@ -1,0 +1,15 @@
+{
+  "version": 3,
+  "skills": {
+    "op-vault": {
+      "source": "fullstackjam/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/fullstackjam/skills.git",
+      "skillPath": "skills/op-vault/SKILL.md",
+      "skillFolderHash": "9479c9858f2a58a2be8462431a521c1b6471fed3",
+      "installedAt": "2026-08-06T15:13:08.125Z",
+      "updatedAt": "2026-08-06T15:14:49.544Z"
+    }
+  },
+  "dismissed": {}
+}
