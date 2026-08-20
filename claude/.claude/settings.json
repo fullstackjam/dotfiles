@@ -2,6 +2,14 @@
   "permissions": {
     "defaultMode": "auto"
   },
+  "extraKnownMarketplaces": {
+    "kami": {
+      "source": {
+        "source": "github",
+        "repo": "tw93/kami"
+      }
+    }
+  },
   "effortLevel": "xhigh",
   "advisorModel": "fable",
   "autoMemoryEnabled": false,
@@ -11,5 +19,9 @@
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "enabledPlugins": {
+    "kami@kami": true
+  },
+  "skipWorkflowUsageWarning": true
 }
