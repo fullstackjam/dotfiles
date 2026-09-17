@@ -108,3 +108,4 @@ source <(fzf --zsh)
 
 # zoxide
 eval "$(zoxide init zsh)"
+eval "$(pyenv init -)"

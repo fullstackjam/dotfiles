@@ -30,3 +30,6 @@
 
 ## Maintaining This File
 - Add an entry only if it corrects a failure I've actually seen AND can be judged from a diff/output. Attitude or values → don't add it.
+
+## Formatting
+- 不用 ①②③ 这类带圈数字（Notion 页面和对话输出都不用）。列举用 1. 2. 3. 或「一、二、三」或「第一、第二」。
