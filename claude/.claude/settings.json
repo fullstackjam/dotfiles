@@ -14,14 +14,11 @@
   "advisorModel": "fable",
   "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "autoCompactEnabled": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "enabledPlugins": {
-    "kami@kami": true
-  },
-  "skipWorkflowUsageWarning": true
+  "skipAutoPermissionPrompt": true
 }
