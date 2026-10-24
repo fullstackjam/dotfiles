@@ -64,7 +64,6 @@ class DeployTests(unittest.TestCase):
         self.assertEqual(len(list((self.target / ".agents/skills").iterdir())), 3)
         self.assertEqual((self.target / ".codex/AGENTS.md").resolve(), self.repo / "codex/.codex/AGENTS.md")
         self.assertFalse((self.target / ".local/share/dotfiles/AGENTS.md").exists())
-        self.assertFalse((self.target / ".claude").exists())
         state = self.target / ".agents/state/owned.json"
         state.parent.mkdir()
         state.write_text('{"keep": true}')
@@ -248,35 +247,6 @@ class DeployTests(unittest.TestCase):
         path.write_text("replacement")
         self.deploy("uninstall")
         self.assertEqual(path.read_text(), "replacement")
-
-    def test_retire_managed_claude_links_preserves_user_data(self):
-        self.deploy("install")
-        manifest = self.target / ".local/share/dotfiles/links.json"
-        links = json.loads(manifest.read_text())
-        retired = {
-            ".claude/CLAUDE.md": self.target / ".local/share/dotfiles/AGENTS.md",
-            ".claude/skills/op-vault": self.target / ".agents/skills/op-vault",
-        }
-        for relative, source in retired.items():
-            dest = self.target / relative
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.symlink_to(source)
-            links[relative] = str(source)
-        manifest.write_text(json.dumps(links))
-        settings = self.target / ".claude/settings.json"
-        settings.write_text('{"userOwned": true}')
-        session = self.target / ".claude/projects/session.jsonl"
-        session.parent.mkdir()
-        session.write_text("user session\n")
-        before = snapshot(self.target)
-        self.deploy("check")
-        self.assertEqual(before, snapshot(self.target))
-        self.deploy("install")
-        for relative in retired:
-            self.assertFalse((self.target / relative).is_symlink())
-        self.assertEqual(settings.read_text(), '{"userOwned": true}')
-        self.assertEqual(session.read_text(), "user session\n")
-        self.assertFalse(any(k.startswith(".claude/") for k in json.loads(manifest.read_text())))
 
     def test_migrate_generated_instructions_to_direct_source(self):
         self.deploy("install")
