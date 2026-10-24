@@ -1,15 +1,16 @@
-HOME            ?= $(shell echo $$HOME)
-STOW            := stow -v --target=$(HOME)
-PACKAGES        := git ssh zsh claude codex ghostty zed
-FOLDED_PACKAGES := agents
+PYTHON ?= python3
+DEPLOY = $(PYTHON) scripts/deploy.py --target "$(HOME)"
 
-.PHONY: install uninstall
+.PHONY: check install uninstall test
+
+check:
+	$(DEPLOY) check
 
 install:
-	mkdir -p $(HOME)/.ssh $(HOME)/.claude $(HOME)/.codex $(HOME)/.config/ghostty $(HOME)/.config/zed
-	$(STOW) $(FOLDED_PACKAGES)
-	$(STOW) --no-folding $(PACKAGES)
+	$(DEPLOY) install
 
 uninstall:
-	$(STOW) -D --no-folding $(PACKAGES)
-	$(STOW) -D $(FOLDED_PACKAGES)
+	$(DEPLOY) uninstall
+
+test:
+	$(PYTHON) -B -m unittest discover -s tests -v

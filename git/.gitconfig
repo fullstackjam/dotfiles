@@ -63,3 +63,7 @@
 
 [credential]
     helper = osxkeychain
+
+# Optional machine-specific identity and access settings.
+[include]
+    path = ~/.config/git/local.conf

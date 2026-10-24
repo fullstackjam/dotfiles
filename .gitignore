@@ -26,3 +26,11 @@ Thumbs.db
 
 # Temporary review clones
 .agent-reach-review/
+
+# Local Python tooling
+__pycache__/
+*.pyc
+
+# Skill installer state belongs to the local home directory.
+agents/.agents/.skill-lock.json
+agents/.agents/state/
