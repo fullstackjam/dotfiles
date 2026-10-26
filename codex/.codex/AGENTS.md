@@ -15,5 +15,6 @@
 ## 本机配置
 
 - 个人配置源码在 `~/.dotfiles`；运行 `make -C ~/.dotfiles install` 更新链接。
+- 两个个人维护的 dotfiles 仓库（`~/.dotfiles` 和 `~/workspace/mazhenting/dotfiles`）默认直接在 `master` 修改、commit 和 push，不为新需求创建分支或 MR；只提交本次改动。
 - 个人 skills 在 `agents/.agents/skills/`；`~/.agents` 是真实目录，运行状态留在 `~/.agents/state/`。
 - 本地扩展可补充配置、skills 和指令；启用后 `~/.codex/AGENTS.md` 指向安装器生成的合并文件，修改请回到各自源码。

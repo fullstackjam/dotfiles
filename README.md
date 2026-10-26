@@ -56,8 +56,8 @@ Git、SSH、Zsh 各自保留一个可选入口，个人配置不依赖这些文�
 ```
 
 只填写实际需要的字段。路径相对于扩展源码目录；扩展不能覆盖个人配置或使用同名 skill。
-SSH 本地入口在 `Host *` 之前读取，供特定主机设置优先值。Shell 本地入口只定义配置或函数，
-凭据不在启动时读取。
+SSH 本地入口在 `Host *` 之前读取，供特定主机设置优先值。交互 shell 的本地入口为 `.config/zsh/local.zsh`，所有 zsh 的环境入口为
+`.config/zsh/local.zshenv`；后者可读取已有会话环境，避免在 shell 启动时触发交互认证。
 
 ```bash
 python3 scripts/deploy.py --extra-source /absolute/path/to/local-config install
