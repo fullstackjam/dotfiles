@@ -1,6 +1,6 @@
 # Dotfiles
 
-我的 macOS 开发环境配置：Ghostty、Zsh、Git、SSH、Zed，以及日常使用的 agent 规则和写作 skills。
+我的 macOS 开发环境配置：Ghostty、Zsh、Git、SSH、Zed，以及日常使用的 agent 规则、工程调查和写作 skills。
 个人配置在这里维护；机器专属内容可以通过独立的本地扩展接入。
 
 ## 安装
@@ -23,13 +23,29 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 | --- | --- | --- |
 | 终端、Shell、Git、SSH、编辑器 | `ghostty/`、`zsh/`、`git/`、`ssh/`、`zed/` | 用户目录中的配置链接 |
 | 通用 agent 规则 | `codex/.codex/AGENTS.md` | `~/.codex/AGENTS.md` |
-| 通用写作 skills | `agents/.agents/skills/humanizer*` | `~/.agents/skills/<name>` |
+| 通用 skills | `agents/.agents/skills/` | `~/.agents/skills/<name>` |
 | 链接归属与扩展选择 | 不入仓库 | `~/.local/share/dotfiles/` |
 | agent 运行状态 | 不入仓库 | `~/.agents/state/` |
 
 配置和 skills 链接源码；改动直接生效。新增或迁移文件后运行 `make install`。
 `~/.agents` 保持真实目录，安装器保留用户自行添加的 skills 和运行状态。
 不要单独 Stow 已由安装器管理的扩展和 agent 目录。
+
+## 个人 skills
+
+| Skill | 用途 |
+| --- | --- |
+| [how](agents/.agents/skills/how/SKILL.md) | 解释当前代码、配置和跨服务运行链路 |
+| [why](agents/.agents/skills/why/SKILL.md) | 追溯历史原因，区分记录、推断和未知 |
+| [blast-radius](agents/.agents/skills/blast-radius/SKILL.md) | 分析 diff 外的影响及关键安全前提 |
+| [benchmark-checklist](agents/.agents/skills/benchmark-checklist/SKILL.md) | 核对性能比较是否成立，不自动启动压测 |
+| [technical-writing](agents/.agents/skills/technical-writing/SKILL.md) | 按读者任务组织技术文档和 PR/MR 说明 |
+| [skill-retrospective](agents/.agents/skills/skill-retrospective/SKILL.md) | 把已发生的问题变成最小的技能或检查改进 |
+| [work-context](agents/.agents/skills/work-context/SKILL.md) | 恢复任务上下文，保存检查点与必要的决策依据 |
+| [humanizer](agents/.agents/skills/humanizer/SKILL.md) / [humanizer-zh](agents/.agents/skills/humanizer-zh/SKILL.md) | 润色已有文本，保留事实、确定程度和作者声音 |
+
+工程调查、写作和复盘技能参考 pstack 的局部方法，来源固定到各技能正文中的提交，许可随目录保留。
+公司环境的访问、账号、发布和审批继续走本地扩展中的领域技能；通用技能不复制这些配置。
 
 ## 本地扩展
 
