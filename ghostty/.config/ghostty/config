@@ -44,8 +44,8 @@ window-save-state = always
 macos-option-as-alt = left
 # 回滚缓冲(约 10MB),默认偏小
 scrollback-limit = 10000000
-# shell 集成增强:光标跟随、sudo 提示、自动改标题
-shell-integration-features = cursor,sudo,title
+# shell 集成增强:光标跟随、sudo 提示、自动改标题、SSH 环境及终端描述同步
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo
 # 改窗口大小时不弹尺寸浮层
 resize-overlay = never
 # 新标签开在最右边
