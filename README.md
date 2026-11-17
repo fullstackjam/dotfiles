@@ -45,7 +45,6 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 | [humanizer](agents/.agents/skills/humanizer/SKILL.md) / [humanizer-zh](agents/.agents/skills/humanizer-zh/SKILL.md) | 润色已有文本，保留事实、确定程度和作者声音 |
 
 工程调查、写作和复盘技能参考 pstack 的局部方法，来源固定到各技能正文中的提交，许可随目录保留。
-公司环境的访问、账号、发布和审批继续走本地扩展中的领域技能；通用技能不复制这些配置。
 
 ## 本地扩展
 
