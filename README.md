@@ -48,10 +48,9 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 
 ## 本地扩展
 
-Git、SSH、Zsh 各自保留一个可选入口，个人配置不依赖这些文件存在：
+SSH 和 Zsh 支持以下可选配置文件：
 
 ```text
-~/.config/git/local.conf
 ~/.ssh/config.local
 ~/.config/zsh/local.zsh
 ```
@@ -61,7 +60,6 @@ Git、SSH、Zsh 各自保留一个可选入口，个人配置不依赖这些文�
 ```json
 {
   "files": {
-    ".config/git/local.conf": "git/config",
     ".ssh/config.local": "ssh/config",
     ".config/zsh/local.zsh": "zsh/local.zsh"
   },

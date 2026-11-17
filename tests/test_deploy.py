@@ -109,8 +109,9 @@ class DeployTests(unittest.TestCase):
         self.assertIn((self.repo / "codex/.codex/AGENTS.md").read_text().strip(), entry.read_text())
         self.assertIn("Private environment instructions", entry.read_text())
         env = {**os.environ, "HOME": str(self.target), "GIT_CONFIG_NOSYSTEM": "1"}
+        self.assertEqual((self.target / ".config/git/local.conf").resolve(), extra / "config")
         email = subprocess.check_output(["git", "config", "--global", "--includes", "user.email"], env=env, text=True)
-        self.assertEqual(email.strip(), "test@example.test")
+        self.assertEqual(email.strip(), "fullstackjam@outlook.com")
         before = snapshot(self.target)
         self.deploy("check")
         self.assertEqual(before, snapshot(self.target))
