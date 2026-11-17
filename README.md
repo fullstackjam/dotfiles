@@ -42,6 +42,7 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 | [technical-writing](agents/.agents/skills/technical-writing/SKILL.md) | 按读者任务组织技术文档和 PR/MR 说明 |
 | [skill-retrospective](agents/.agents/skills/skill-retrospective/SKILL.md) | 把已发生的问题变成最小的技能或检查改进 |
 | [work-context](agents/.agents/skills/work-context/SKILL.md) | 恢复任务上下文，保存检查点与必要的决策依据 |
+| [op-vault](agents/.agents/skills/op-vault/SKILL.md) | 定位 1Password 条目、注入凭据并验证条目修改 |
 | [humanizer](agents/.agents/skills/humanizer/SKILL.md) / [humanizer-zh](agents/.agents/skills/humanizer-zh/SKILL.md) | 润色已有文本，保留事实、确定程度和作者声音 |
 
 工程调查、写作和复盘技能参考 pstack 的局部方法，来源固定到各技能正文中的提交，许可随目录保留。
