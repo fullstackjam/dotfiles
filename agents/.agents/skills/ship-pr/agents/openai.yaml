@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ship PR"
+  short_description: "Create, review, and ship PRs across repositories"
+  default_prompt: "Use $ship-pr to ship this finished change through CI, review, and merge."
