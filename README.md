@@ -33,17 +33,20 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 
 ## 个人 skills
 
-| Skill | 用途 |
-| --- | --- |
-| [how](agents/.agents/skills/how/SKILL.md) | 解释当前代码、配置和跨服务运行链路 |
-| [why](agents/.agents/skills/why/SKILL.md) | 追溯历史原因，区分记录、推断和未知 |
-| [blast-radius](agents/.agents/skills/blast-radius/SKILL.md) | 分析 diff 外的影响及关键安全前提 |
-| [benchmark-checklist](agents/.agents/skills/benchmark-checklist/SKILL.md) | 核对性能比较是否成立，不自动启动压测 |
-| [technical-writing](agents/.agents/skills/technical-writing/SKILL.md) | 按读者任务组织技术文档和 PR/MR 说明 |
-| [skill-retrospective](agents/.agents/skills/skill-retrospective/SKILL.md) | 把已发生的问题变成最小的技能或检查改进 |
-| [work-context](agents/.agents/skills/work-context/SKILL.md) | 恢复任务上下文，保存检查点与必要的决策依据 |
-| [op-vault](agents/.agents/skills/op-vault/SKILL.md) | 定位 1Password 条目、注入凭据并验证条目修改 |
-| [humanizer](agents/.agents/skills/humanizer/SKILL.md) / [humanizer-zh](agents/.agents/skills/humanizer-zh/SKILL.md) | 润色已有文本，保留事实、确定程度和作者声音 |
+| 类别 | Skill | 何时使用 |
+| --- | --- | --- |
+| 工程调查 | [how](agents/.agents/skills/how/SKILL.md) | 当前怎样运行、改动该放在哪层 |
+| 工程调查 | [why](agents/.agents/skills/why/SKILL.md) | 当时为什么这样做、历史约束是否有记录 |
+| 工程调查 | [blast-radius](agents/.agents/skills/blast-radius/SKILL.md) | 某个改动会影响哪些消费者、关键前提是否成立 |
+| 专项核验 | [benchmark-checklist](agents/.agents/skills/benchmark-checklist/SKILL.md) | 判断性能比较是否成立，不自动启动压测 |
+| 文稿编辑 | [technical-writing](agents/.agents/skills/technical-writing/SKILL.md) | 组织技术指南、README、设计说明和 PR/MR 内容 |
+| 文稿编辑 | [humanizer](agents/.agents/skills/humanizer/SKILL.md) | 保留英文版润色规则，长示例按需读取 |
+| 任务衔接 | [work-context](agents/.agents/skills/work-context/SKILL.md) | 恢复某项工作、保存检查点与决策依据 |
+| 任务复盘 | [skill-retrospective](agents/.agents/skills/skill-retrospective/SKILL.md) | 把已发生的问题变成最小的技能或检查改进 |
+| 凭据操作 | [op-vault](agents/.agents/skills/op-vault/SKILL.md) | 定位 1Password 条目、注入凭据并验证条目修改 |
+
+分类只用于查找，安装目录保持扁平。通用协作偏好维护在 `codex/.codex/AGENTS.md`，
+项目专属的启动、复现和验收流程放在对应项目；插件提供的 skills 由插件维护。
 
 工程调查、写作和复盘技能参考 pstack 的局部方法，来源固定到各技能正文中的提交，许可随目录保留。
 

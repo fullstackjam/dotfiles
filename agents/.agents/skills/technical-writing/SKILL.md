@@ -1,6 +1,6 @@
 ---
 name: technical-writing
-description: 按读者任务组织和改写技术指南、README、设计说明及 PR/MR 描述，区分操作步骤、参考事实和原理解释，保留准确条件与验收证据。只润色措辞用 humanizer 或 humanizer-zh，专门报告沿用其领域规范。
+description: 按读者任务组织和改写技术指南、README、设计说明及 PR/MR 描述，区分操作步骤、参考事实和原理解释，保留准确条件与验收证据。只润色措辞用 humanizer，专门报告沿用其领域规范。
 license: MIT
 ---
 
@@ -31,7 +31,7 @@ license: MIT
 
 保持事实、时间、范围、否定、归因和确定程度。缺数字就不用数字，不把主观反馈改成性能事实。不把代码、路径、链接目标或受保护的格式当作 prose 润色。
 
-措辞编辑按语言使用 [humanizer](../humanizer/SKILL.md) 或 [humanizer-zh](../humanizer-zh/SKILL.md)，不重复维护同一套模式。写 Wiki、周报或其他有领域规范的内容时，保留对应技能的双语、归期、字数和写入要求。
+措辞编辑使用 [humanizer](../humanizer/SKILL.md)，不重复维护同一套模式。写 Wiki、周报或其他有领域规范的内容时，保留对应技能的双语、归期、字数和写入要求。
 
 ## PR/MR 与提交说明
 
