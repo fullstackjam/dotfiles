@@ -38,6 +38,7 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 | 工程调查 | [how](agents/.agents/skills/how/SKILL.md) | 当前怎样运行、改动该放在哪层 |
 | 工程调查 | [why](agents/.agents/skills/why/SKILL.md) | 当时为什么这样做、历史约束是否有记录 |
 | 工程调查 | [blast-radius](agents/.agents/skills/blast-radius/SKILL.md) | 某个改动会影响哪些消费者、关键前提是否成立 |
+| 缺陷修复 | [tdd](agents/.agents/skills/tdd/SKILL.md) | 用 `$tdd` 调用，先复现失败，再用同一测试验证修复（[上游版本](https://github.com/cursor/plugins/blob/35a90942a7f02e1ebbc2443643179815f2147954/pstack/skills/tdd/SKILL.md)） |
 | 专项核验 | [benchmark-checklist](agents/.agents/skills/benchmark-checklist/SKILL.md) | 判断性能比较是否成立，不自动启动压测 |
 | 文稿编辑 | [technical-writing](agents/.agents/skills/technical-writing/SKILL.md) | 组织技术指南、README、设计说明和 PR/MR 内容 |
 | 文稿编辑 | [humanizer](agents/.agents/skills/humanizer/SKILL.md) | 保留英文版润色规则，长示例按需读取 |
