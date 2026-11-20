@@ -56,8 +56,6 @@ op run -- psql -h '<host>' -c 'select 1'
 
 跨库复制需确认目标位置和内容；整理或复制的授权不自动包含归档、删除源条目。更新密码库中的值不等于完成上游服务的密码或 API key 轮换。
 
-## 来源与核对
-
-采纳 [op-vault 的通用工作方法](https://gitlab.huami.com/mazhenting/dotfiles/-/blob/f2b9c2acce0e7a827b0f6005f1a652251ca27aef/agents/.agents/skills/op-vault/SKILL.md)，重新整理为个人配置适用的指引；不引入源仓库的固定库名、token 条目、认证包装器和登录会话脚本。
+## 参考文档
 
 命令行为以本机帮助及官方文档为准：[凭据注入](https://developer.1password.com/docs/cli/secrets-scripts/)、[条目编辑与 passkey 限制](https://developer.1password.com/docs/cli/item-edit/)。

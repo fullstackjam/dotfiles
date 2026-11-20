@@ -44,6 +44,7 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 | 任务衔接 | [work-context](agents/skills/work-context/SKILL.md) | 恢复某项工作、保存检查点与决策依据 |
 | 任务复盘 | [skill-retrospective](agents/skills/skill-retrospective/SKILL.md) | 把已发生的问题变成最小的技能或检查改进 |
 | 凭据操作 | [op-vault](agents/skills/op-vault/SKILL.md) | 定位 1Password 条目、注入凭据并验证条目修改 |
+| 代码交付 | [ship-pr](agents/skills/ship-pr/SKILL.md) | 提交 GitHub PR 并推进 CI、审查、修复与合并 |
 
 分类只用于查找，安装目录保持扁平。通用协作偏好维护在 `agents/AGENTS.md`，
 项目专属的启动、复现和验收流程放在对应项目；插件提供的 skills 由插件维护。
