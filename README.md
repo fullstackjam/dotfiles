@@ -22,8 +22,8 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 | 内容 | 源码 | 安装入口 |
 | --- | --- | --- |
 | 终端、Shell、Git、SSH、编辑器 | `ghostty/`、`zsh/`、`git/`、`ssh/`、`zed/` | 用户目录中的配置链接 |
-| 通用 agent 规则 | `codex/.codex/AGENTS.md` | `~/.codex/AGENTS.md` |
-| 通用 skills | `agents/.agents/skills/` | `~/.agents/skills/<name>` |
+| 通用 agent 规则 | `agents/AGENTS.md` | `~/.codex/AGENTS.md`、`~/.gemini/config/AGENTS.md` |
+| 通用 skills | `agents/skills/` | `~/.agents/skills/<name>`、`~/.gemini/config/skills/<name>` |
 | 链接归属与扩展选择 | 不入仓库 | `~/.local/share/dotfiles/` |
 | agent 运行状态 | 不入仓库 | `~/.agents/state/` |
 
@@ -35,18 +35,18 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 
 | 类别 | Skill | 何时使用 |
 | --- | --- | --- |
-| 工程调查 | [how](agents/.agents/skills/how/SKILL.md) | 当前怎样运行、改动该放在哪层 |
-| 工程调查 | [why](agents/.agents/skills/why/SKILL.md) | 当时为什么这样做、历史约束是否有记录 |
-| 工程调查 | [blast-radius](agents/.agents/skills/blast-radius/SKILL.md) | 某个改动会影响哪些消费者、关键前提是否成立 |
-| 缺陷修复 | [tdd](agents/.agents/skills/tdd/SKILL.md) | 用 `$tdd` 调用，先复现失败，再用同一测试验证修复（[上游版本](https://github.com/cursor/plugins/blob/35a90942a7f02e1ebbc2443643179815f2147954/pstack/skills/tdd/SKILL.md)） |
-| 专项核验 | [benchmark-checklist](agents/.agents/skills/benchmark-checklist/SKILL.md) | 判断性能比较是否成立，不自动启动压测 |
-| 文稿编辑 | [technical-writing](agents/.agents/skills/technical-writing/SKILL.md) | 组织技术指南、README、设计说明和 PR/MR 内容 |
-| 文稿编辑 | [humanizer](agents/.agents/skills/humanizer/SKILL.md) | 保留英文版润色规则，长示例按需读取 |
-| 任务衔接 | [work-context](agents/.agents/skills/work-context/SKILL.md) | 恢复某项工作、保存检查点与决策依据 |
-| 任务复盘 | [skill-retrospective](agents/.agents/skills/skill-retrospective/SKILL.md) | 把已发生的问题变成最小的技能或检查改进 |
-| 凭据操作 | [op-vault](agents/.agents/skills/op-vault/SKILL.md) | 定位 1Password 条目、注入凭据并验证条目修改 |
+| 工程调查 | [how](agents/skills/how/SKILL.md) | 当前怎样运行、改动该放在哪层 |
+| 工程调查 | [why](agents/skills/why/SKILL.md) | 当时为什么这样做、历史约束是否有记录 |
+| 工程调查 | [blast-radius](agents/skills/blast-radius/SKILL.md) | 某个改动会影响哪些消费者、关键前提是否成立 |
+| 缺陷修复 | [tdd](agents/skills/tdd/SKILL.md) | 用 `$tdd` 调用，先复现失败，再用同一测试验证修复（[上游版本](https://github.com/cursor/plugins/blob/35a90942a7f02e1ebbc2443643179815f2147954/pstack/skills/tdd/SKILL.md)） |
+| 专项核验 | [benchmark-checklist](agents/skills/benchmark-checklist/SKILL.md) | 判断性能比较是否成立，不自动启动压测 |
+| 文稿编辑 | [technical-writing](agents/skills/technical-writing/SKILL.md) | 组织技术指南、README、设计说明和 PR/MR 内容 |
+| 文稿编辑 | [humanizer](agents/skills/humanizer/SKILL.md) | 保留英文版润色规则，长示例按需读取 |
+| 任务衔接 | [work-context](agents/skills/work-context/SKILL.md) | 恢复某项工作、保存检查点与决策依据 |
+| 任务复盘 | [skill-retrospective](agents/skills/skill-retrospective/SKILL.md) | 把已发生的问题变成最小的技能或检查改进 |
+| 凭据操作 | [op-vault](agents/skills/op-vault/SKILL.md) | 定位 1Password 条目、注入凭据并验证条目修改 |
 
-分类只用于查找，安装目录保持扁平。通用协作偏好维护在 `codex/.codex/AGENTS.md`，
+分类只用于查找，安装目录保持扁平。通用协作偏好维护在 `agents/AGENTS.md`，
 项目专属的启动、复现和验收流程放在对应项目；插件提供的 skills 由插件维护。
 
 工程调查、写作和复盘技能参考 pstack 的局部方法，来源固定到各技能正文中的提交，许可随目录保留。
@@ -85,7 +85,7 @@ make install
 
 安装成功后，本机记住扩展路径。后续 `make check` 和 `make install` 会继续包含它；
 扩展目录丢失时停止并报错，不静默删除已安装内容。
-启用扩展指令后，安装器将个人规则与扩展指令合并到本机生成文件，再链接到 Codex 入口。
+启用扩展指令后，安装器将个人规则与扩展指令合并到本机生成文件，再链接到 Codex 和 Antigravity 入口。
 修改任一指令源后重新安装，不直接编辑生成文件。
 
 移除扩展并保留个人配置：

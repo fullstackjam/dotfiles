@@ -9,5 +9,5 @@
 
 - 个人配置源码在 `~/.dotfiles`。运行 `make -C ~/.dotfiles install` 更新链接。
 - 修改 `~/.dotfiles` 时，默认直接在 `master` 上修改、提交和推送，只提交本次改动。
-- 个人 skills 源码在 `~/.dotfiles/agents/.agents/skills/`，运行状态在 `~/.agents/state/`。
-- 本地扩展的 `deployment.json` 配置了 `instructions` 时，`~/.codex/AGENTS.md` 指向合并文件。修改对应源码后，运行 `make -C ~/.dotfiles install` 重新生成该文件。
+- 个人 skills 源码在 `~/.dotfiles/agents/skills/`，运行状态在 `~/.agents/state/`。
+- 本地扩展的 `deployment.json` 配置了 `instructions` 时，`~/.codex/AGENTS.md` 和 `~/.gemini/config/AGENTS.md` 指向合并文件。修改对应源码后，运行 `make -C ~/.dotfiles install` 重新生成该文件。

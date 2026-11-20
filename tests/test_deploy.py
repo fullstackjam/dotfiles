@@ -34,19 +34,19 @@ class DeployTests(unittest.TestCase):
         root = Path(self.temp.name).resolve()
         self.repo = root / "repo"
         self.repo.mkdir()
-        for name in ["git", "ssh", "zsh", "codex", "ghostty", "zed", "scripts"]:
+        for name in ["git", "ssh", "zsh", "ghostty", "zed", "scripts"]:
             shutil.copytree(SOURCE / name, self.repo / name, symlinks=True)
         subprocess.run(["git", "init", "--quiet", str(self.repo)], check=True)
         self.target = root / "home"
         self.target.mkdir()
-        (self.repo / "agents/.agents").mkdir(parents=True)
-        (self.repo / "agents/.agents/.skill-lock.json").write_text('{"version": 1}')
+        (self.repo / "agents").mkdir(parents=True)
+        shutil.copy2(SOURCE / "agents/AGENTS.md", self.repo / "agents/AGENTS.md")
         (self.repo / "bin").mkdir()
         runner = self.repo / "bin/op"
         runner.write_text('#!/usr/bin/python3\nimport sys\nprint("available")\n')
         runner.chmod(0o755)
         for name in ["op-vault", "work-one", "work-two"]:
-            folder = self.repo / "agents/.agents/skills" / name
+            folder = self.repo / "agents/skills" / name
             folder.mkdir(parents=True)
             (folder / "SKILL.md").write_text(f"---\nname: {name}\ndescription: A test skill\n---\n")
 
@@ -62,7 +62,9 @@ class DeployTests(unittest.TestCase):
         self.deploy("install")
         self.assertFalse((self.target / ".agents").is_symlink())
         self.assertEqual(len(list((self.target / ".agents/skills").iterdir())), 3)
-        self.assertEqual((self.target / ".codex/AGENTS.md").resolve(), self.repo / "codex/.codex/AGENTS.md")
+        self.assertEqual(len(list((self.target / ".gemini/config/skills").iterdir())), 3)
+        self.assertEqual((self.target / ".codex/AGENTS.md").resolve(), self.repo / "agents/AGENTS.md")
+        self.assertEqual((self.target / ".gemini/config/AGENTS.md").resolve(), self.repo / "agents/AGENTS.md")
         self.assertFalse((self.target / ".local/share/dotfiles/AGENTS.md").exists())
         state = self.target / ".agents/state/owned.json"
         state.parent.mkdir()
@@ -79,6 +81,7 @@ class DeployTests(unittest.TestCase):
         self.assertTrue(user_skill.exists())
         self.assertFalse((self.target / ".gitconfig").is_symlink())
         self.assertFalse((self.target / ".codex/AGENTS.md").is_symlink())
+        self.assertFalse((self.target / ".gemini/config/AGENTS.md").is_symlink())
         self.assertEqual(source_before, snapshot(self.repo))
 
     def extension(self):
@@ -104,9 +107,12 @@ class DeployTests(unittest.TestCase):
         command = self.target / ".local/bin/tool"
         self.assertEqual(subprocess.check_output([str(command)], text=True), "available")
         self.assertEqual((self.target / ".agents/skills/team-only").resolve(), extra / "skills/team-only")
+        self.assertEqual((self.target / ".gemini/config/skills/team-only").resolve(), extra / "skills/team-only")
         entry = self.target / ".codex/AGENTS.md"
+        gemini_entry = self.target / ".gemini/config/AGENTS.md"
         self.assertEqual(entry.resolve(), self.target / ".local/share/dotfiles/AGENTS.md")
-        self.assertIn((self.repo / "codex/.codex/AGENTS.md").read_text().strip(), entry.read_text())
+        self.assertEqual(gemini_entry.resolve(), self.target / ".local/share/dotfiles/AGENTS.md")
+        self.assertIn((self.repo / "agents/AGENTS.md").read_text().strip(), entry.read_text())
         self.assertIn("Private environment instructions", entry.read_text())
         env = {**os.environ, "HOME": str(self.target), "GIT_CONFIG_NOSYSTEM": "1"}
         self.assertEqual((self.target / ".config/git/local.conf").resolve(), extra / "config")
@@ -123,15 +129,18 @@ class DeployTests(unittest.TestCase):
         self.deploy("install", "--without-extra")
         self.assertFalse(command.is_symlink())
         self.assertFalse((self.target / ".agents/skills/team-only").is_symlink())
+        self.assertFalse((self.target / ".gemini/config/skills/team-only").is_symlink())
         self.assertTrue((self.target / ".agents/skills/work-one").exists())
-        self.assertEqual(entry.resolve(), self.repo / "codex/.codex/AGENTS.md")
+        self.assertTrue((self.target / ".gemini/config/skills/work-one").exists())
+        self.assertEqual(entry.resolve(), self.repo / "agents/AGENTS.md")
+        self.assertEqual(gemini_entry.resolve(), self.repo / "agents/AGENTS.md")
         self.assertTrue((extra / "bin/tool").exists())
         self.assertFalse((self.target / ".local/share/dotfiles/AGENTS.md").exists())
 
     def test_extension_migrates_existing_managed_links(self):
         self.deploy("install")
         extra = self.extension()
-        old = self.repo / "agents/.agents/skills/work-one"
+        old = self.repo / "agents/skills/work-one"
         shutil.move(old, extra / "skills/work-one")
         # A formerly Stow-managed file was not recorded in the agent manifest.
         identity = self.repo / "git/.config/git/identity.conf"
@@ -170,7 +179,10 @@ class DeployTests(unittest.TestCase):
         self.deploy("install", "--without-extra")
 
     def test_migrate_existing_directory_link_and_agent_entries(self):
-        (self.target / ".agents").symlink_to(self.repo / "agents/.agents")
+        legacy_agents = self.repo / "agents/.agents"
+        legacy_agents.mkdir(parents=True)
+        (legacy_agents / ".skill-lock.json").write_text('{"version": 1}')
+        (self.target / ".agents").symlink_to(legacy_agents)
         for rel, source in [(".codex/AGENTS.md", "codex/.codex/AGENTS.md")]:
             dest = self.target / rel
             dest.parent.mkdir(parents=True, exist_ok=True)
@@ -186,7 +198,7 @@ class DeployTests(unittest.TestCase):
     def test_migrate_old_checkout_links_then_remove_old_checkout(self):
         old = self.repo.parent / "old-checkout"
         sources = {
-            ".agents/skills/work-one": "agents/.agents/skills/work-one",
+            ".agents/skills/work-one": "agents/skills/work-one",
             ".config/dotfiles/work/git.conf": "git/.gitconfig",
             ".local/bin/work-run": "bin/op",
         }
@@ -262,11 +274,11 @@ class DeployTests(unittest.TestCase):
         manifest.write_text(json.dumps(links))
         self.deploy("install")
         self.assertFalse(generated.exists())
-        self.assertEqual(entry.resolve(), self.repo / "codex/.codex/AGENTS.md")
+        self.assertEqual(entry.resolve(), self.repo / "agents/AGENTS.md")
 
     def test_missing_instructions_writes_nothing(self):
         self.deploy("install")
-        (self.repo / "codex/.codex/AGENTS.md").unlink()
+        (self.repo / "agents/AGENTS.md").unlink()
         before = snapshot(self.target)
         self.deploy("install", ok=False)
         self.assertEqual(before, snapshot(self.target))

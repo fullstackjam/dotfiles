@@ -32,5 +32,5 @@ __pycache__/
 *.pyc
 
 # Skill installer state belongs to the local home directory.
-agents/.agents/.skill-lock.json
-agents/.agents/state/
+agents/.skill-lock.json
+agents/state/
