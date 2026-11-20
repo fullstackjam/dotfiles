@@ -24,6 +24,7 @@
     "dock": "left"
   },
   "agent": {
+    "default_profile": "write",
     "sandbox_permissions": {
       "allow_all_hosts": true,
       "allow_fs_write_all": true,
@@ -36,8 +37,8 @@
     "dock": "right",
     "default_model": {
       "speed": "fast",
-      "provider": "openai-subscribed",
-      "model": "gpt-5.6-sol",
+      "provider": "deepseek",
+      "model": "deepseek-flash",
       "enable_thinking": true,
       "effort": "high"
     },
