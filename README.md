@@ -1,7 +1,6 @@
 # Dotfiles
 
 我的 macOS 开发环境配置：Ghostty、Zsh、Git、SSH、Zed，以及日常使用的 agent 规则、工程调查和写作 skills。
-个人配置在这里维护；机器专属内容可以通过独立的本地扩展接入。
 
 ## 安装
 
@@ -24,12 +23,12 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 | 终端、Shell、Git、SSH、编辑器 | `ghostty/`、`zsh/`、`git/`、`ssh/`、`zed/` | 用户目录中的配置链接 |
 | 通用 agent 规则 | `agents/AGENTS.md` | `~/.codex/AGENTS.md`、`~/.gemini/config/AGENTS.md` |
 | 通用 skills | `agents/skills/` | `~/.agents/skills/<name>`、`~/.gemini/config/skills/<name>` |
-| 链接归属与扩展选择 | 不入仓库 | `~/.local/share/dotfiles/` |
+| 链接归属记录 | 不入仓库 | `~/.local/share/dotfiles/` |
 | agent 运行状态 | 不入仓库 | `~/.agents/state/` |
 
 配置和 skills 链接源码；改动直接生效。新增或迁移文件后运行 `make install`。
 `~/.agents` 保持真实目录，安装器保留用户自行添加的 skills 和运行状态。
-不要单独 Stow 已由安装器管理的扩展和 agent 目录。
+不要单独 Stow 已由安装器管理的 agent 目录。
 
 ## 个人 skills
 
@@ -51,45 +50,12 @@ make uninstall   # 移除受管链接，保留源码和用户数据
 
 工程调查、写作和复盘技能参考 pstack 的局部方法，来源固定到各技能正文中的提交，许可随目录保留。
 
-## 本地扩展
+## 本机覆盖
 
-SSH 和 Zsh 支持以下可选配置文件：
+SSH 和 Zsh 支持以下不入仓库的可选本地配置文件：
 
 ```text
 ~/.ssh/config.local
 ~/.config/zsh/local.zsh
-```
-
-需要统一管理扩展时，在独立源码目录提供 `deployment.json`。例如：
-
-```json
-{
-  "files": {
-    ".ssh/config.local": "ssh/config",
-    ".config/zsh/local.zsh": "zsh/local.zsh"
-  },
-  "skills": "agents/.agents/skills",
-  "instructions": "codex/LOCAL.md"
-}
-```
-
-只填写实际需要的字段。路径相对于扩展源码目录；扩展不能覆盖个人配置或使用同名 skill。
-SSH 本地入口在 `Host *` 之前读取，供特定主机设置优先值。交互 shell 的本地入口为 `.config/zsh/local.zsh`，所有 zsh 的环境入口为
-`.config/zsh/local.zshenv`；后者可读取已有会话环境，避免在 shell 启动时触发交互认证。
-
-```bash
-python3 scripts/deploy.py --extra-source /absolute/path/to/local-config install
-make check
-make install
-```
-
-安装成功后，本机记住扩展路径。后续 `make check` 和 `make install` 会继续包含它；
-扩展目录丢失时停止并报错，不静默删除已安装内容。
-启用扩展指令后，安装器将个人规则与扩展指令合并到本机生成文件，再链接到 Codex 和 Antigravity 入口。
-修改任一指令源后重新安装，不直接编辑生成文件。
-
-移除扩展并保留个人配置：
-
-```bash
-python3 scripts/deploy.py --without-extra install
+~/.config/zsh/local.zshenv
 ```

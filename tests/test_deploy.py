@@ -50,10 +50,10 @@ class DeployTests(unittest.TestCase):
             folder.mkdir(parents=True)
             (folder / "SKILL.md").write_text(f"---\nname: {name}\ndescription: A test skill\n---\n")
 
-    def deploy(self, action, *extra, ok=True):
+    def deploy(self, action, ok=True):
         result = subprocess.run([sys.executable, "-B", str(self.repo / "scripts/deploy.py"),
-                                 "--target", str(self.target),
-                                 *extra, action], capture_output=True, text=True)
+                                 "--target", str(self.target), action],
+                                capture_output=True, text=True)
         self.assertEqual(result.returncode == 0, ok, result.stdout + result.stderr)
         return result
 
@@ -83,100 +83,6 @@ class DeployTests(unittest.TestCase):
         self.assertFalse((self.target / ".codex/AGENTS.md").is_symlink())
         self.assertFalse((self.target / ".gemini/config/AGENTS.md").is_symlink())
         self.assertEqual(source_before, snapshot(self.repo))
-
-    def extension(self):
-        extra = self.repo.parent / "local extension"
-        extra.mkdir()
-        subprocess.run(["git", "init", "--quiet", str(extra)], check=True)
-        (extra / "bin").mkdir()
-        command = extra / "bin/tool"
-        command.write_text('#!/bin/sh\nprintf "%s" available\n')
-        command.chmod(0o755)
-        (extra / "skills/team-only").mkdir(parents=True)
-        (extra / "skills/team-only/SKILL.md").write_text("A private skill")
-        (extra / "AGENTS.md").write_text("Private environment instructions")
-        (extra / "config").write_text("[user]\n email = test@example.test\n")
-        config = {"files": {".local/bin/tool": "bin/tool", ".config/git/local.conf": "config"},
-                  "skills": "skills", "instructions": "AGENTS.md"}
-        (extra / "deployment.json").write_text(json.dumps(config))
-        return extra
-
-    def test_extension_install_remember_refresh_and_detach(self):
-        extra = self.extension()
-        self.deploy("install", "--extra-source", str(extra))
-        command = self.target / ".local/bin/tool"
-        self.assertEqual(subprocess.check_output([str(command)], text=True), "available")
-        self.assertEqual((self.target / ".agents/skills/team-only").resolve(), extra / "skills/team-only")
-        self.assertEqual((self.target / ".gemini/config/skills/team-only").resolve(), extra / "skills/team-only")
-        entry = self.target / ".codex/AGENTS.md"
-        gemini_entry = self.target / ".gemini/config/AGENTS.md"
-        self.assertEqual(entry.resolve(), self.target / ".local/share/dotfiles/AGENTS.md")
-        self.assertEqual(gemini_entry.resolve(), self.target / ".local/share/dotfiles/AGENTS.md")
-        self.assertIn((self.repo / "agents/AGENTS.md").read_text().strip(), entry.read_text())
-        self.assertIn("Private environment instructions", entry.read_text())
-        env = {**os.environ, "HOME": str(self.target), "GIT_CONFIG_NOSYSTEM": "1"}
-        self.assertEqual((self.target / ".config/git/local.conf").resolve(), extra / "config")
-        email = subprocess.check_output(["git", "config", "--global", "--includes", "user.email"], env=env, text=True)
-        self.assertEqual(email.strip(), "fullstackjam@outlook.com")
-        before = snapshot(self.target)
-        self.deploy("check")
-        self.assertEqual(before, snapshot(self.target))
-        self.deploy("install")
-        self.assertEqual(before, snapshot(self.target))
-        (extra / "AGENTS.md").write_text("Updated private instructions")
-        self.deploy("install")
-        self.assertIn("Updated private instructions", entry.read_text())
-        self.deploy("install", "--without-extra")
-        self.assertFalse(command.is_symlink())
-        self.assertFalse((self.target / ".agents/skills/team-only").is_symlink())
-        self.assertFalse((self.target / ".gemini/config/skills/team-only").is_symlink())
-        self.assertTrue((self.target / ".agents/skills/work-one").exists())
-        self.assertTrue((self.target / ".gemini/config/skills/work-one").exists())
-        self.assertEqual(entry.resolve(), self.repo / "agents/AGENTS.md")
-        self.assertEqual(gemini_entry.resolve(), self.repo / "agents/AGENTS.md")
-        self.assertTrue((extra / "bin/tool").exists())
-        self.assertFalse((self.target / ".local/share/dotfiles/AGENTS.md").exists())
-
-    def test_extension_migrates_existing_managed_links(self):
-        self.deploy("install")
-        extra = self.extension()
-        old = self.repo / "agents/skills/work-one"
-        shutil.move(old, extra / "skills/work-one")
-        # A formerly Stow-managed file was not recorded in the agent manifest.
-        identity = self.repo / "git/.config/git/identity.conf"
-        identity.parent.mkdir(parents=True, exist_ok=True)
-        identity.write_text("[user]\n email = private@example.test\n")
-        dest = self.target / ".config/git/identity.conf"
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.symlink_to(identity)
-        shutil.move(identity, extra / "identity.conf")
-        path = extra / "deployment.json"
-        config = json.loads(path.read_text())
-        config["files"][".config/git/identity.conf"] = "identity.conf"
-        path.write_text(json.dumps(config))
-        self.deploy("install", "--extra-source", str(extra))
-        self.assertEqual((self.target / ".agents/skills/work-one").resolve(), extra / "skills/work-one")
-        self.assertEqual(dest.resolve(), extra / "identity.conf")
-        self.deploy("uninstall")
-        self.assertFalse(dest.is_symlink())
-        self.assertFalse((self.target / ".local/bin/tool").is_symlink())
-        self.assertTrue((extra / "identity.conf").exists())
-
-    def test_duplicate_extension_skill_writes_nothing(self):
-        extra = self.extension()
-        shutil.copytree(extra / "skills/team-only", extra / "skills/work-one")
-        before = snapshot(self.target)
-        self.deploy("install", "--extra-source", str(extra), ok=False)
-        self.assertEqual(before, snapshot(self.target))
-
-    def test_missing_saved_extension_writes_nothing(self):
-        extra = self.extension()
-        self.deploy("install", "--extra-source", str(extra))
-        shutil.rmtree(extra)
-        before = snapshot(self.target)
-        self.deploy("install", ok=False)
-        self.assertEqual(before, snapshot(self.target))
-        self.deploy("install", "--without-extra")
 
     def test_migrate_existing_directory_link_and_agent_entries(self):
         legacy_agents = self.repo / "agents/.agents"
@@ -246,13 +152,6 @@ class DeployTests(unittest.TestCase):
         self.deploy("install", ok=False)
         self.assertEqual(before, snapshot(self.target))
 
-    def test_non_executable_extension_command_writes_nothing(self):
-        before = snapshot(self.target)
-        extra = self.extension()
-        (extra / "bin/tool").chmod(0o644)
-        self.deploy("install", "--extra-source", str(extra), ok=False)
-        self.assertEqual(before, snapshot(self.target))
-
     def test_uninstall_preserves_replaced_user_file(self):
         self.deploy("install")
         path = self.target / ".codex/AGENTS.md"
@@ -265,6 +164,8 @@ class DeployTests(unittest.TestCase):
         self.deploy("install")
         generated = self.target / ".local/share/dotfiles/AGENTS.md"
         generated.write_text("<!-- Generated by make install; edit source repositories. -->\nold rules")
+        sources = self.target / ".local/share/dotfiles/sources.json"
+        sources.write_text("{}\n")
         entry = self.target / ".codex/AGENTS.md"
         entry.unlink()
         entry.symlink_to(generated)
@@ -274,6 +175,7 @@ class DeployTests(unittest.TestCase):
         manifest.write_text(json.dumps(links))
         self.deploy("install")
         self.assertFalse(generated.exists())
+        self.assertFalse(sources.exists())
         self.assertEqual(entry.resolve(), self.repo / "agents/AGENTS.md")
 
     def test_missing_instructions_writes_nothing(self):
